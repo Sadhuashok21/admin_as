@@ -1,0 +1,152 @@
+<!-- <?php
+
+    require_once '../../components/mail_db_connect.php';
+    require_once '../../components/core.php';
+
+
+    $hero_q = "SELECT * FROM `heroes`";
+    $hero_r = mysqli_query($mc_ma, $hero_q);
+
+    $heroine_q = "SELECT * FROM `heroines`";
+    $heroine_r = mysqli_query($mc_ma, $heroine_q);
+
+    if(isset($_POST['movie_name']) && isset($_FILES['movie_img']['name']) && isset($_POST['hero']) && isset($_POST['heroine']) && isset($_POST['release_year'])) {
+        $movie_name = $_POST['movie_name'];
+        $movie_img = $_FILES['movie_img']['name'];
+        $hero = $_POST['hero'];
+        $heroine = $_POST['heroine'];
+        $release_year = $_POST['release_year'];
+
+        //if ($hero == 'Select') {
+       //     echo 'Please select hero';
+        //}
+        $movie_id = unique_id();
+        $user_id = getuserfield("user_id");
+        
+        $tmp_img = $_FILES['movie_img']['tmp_name'];
+        $rename = unique_id() . '.webp';
+        $dir = "../images/";
+        move_uploaded_file($tmp_img, $dir.$rename);
+        
+        $query = "INSERT INTO `movies`(`id`, `movie_name`, `movie_id`, `user_id`, `song_img`, `movie_details`, `release_year`, `hero`, `heroine`, `status`, `time`) VALUES (NULL, '$movie_name', '$movie_id', '$user_id', '$rename', '', '$release_year', '$hero', '$heroine', 'disapproved', CURRENT_TIMESTAMP())";
+        $query_run = mysqli_query($mc_ma, $query);
+
+
+    }
+
+
+?>-->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Upload | As</title>
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+    <link rel="icon" href="{% static 'images/as_logo.webp' %}">
+    <style>
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 90%;
+        }
+
+        body.active .container {
+            color: black
+        }
+
+        .content {
+            background-color: #3B82F6;
+            padding: .5rem;
+            border-radius: .5rem
+        }
+
+        .container .content input, select {
+            height: 29px;
+            border-radius: .3rem;
+            width: calc(90%);
+            padding-left: .5rem;
+            padding-right: .5rem;
+        }
+
+        .container .content input[type="submit"] {
+            background-color: #22C55E;
+            cursor: pointer;
+        }
+
+        .container .content input[type="submit"]:hover {
+            background-color: #16A34A;
+        }
+
+        .container .content .star {
+            color: red;
+        }
+
+        .container .content table td {
+            padding: .5rem;
+        }
+    </style>
+</head>
+<body>
+    {% include 'sidebar.html' %}
+    <div class="container">
+        <div class="content">
+            <center><h1>Movie Upload</h1></center>
+            <form method="POST" action="" enctype="multipart/form-data">
+                <table>
+                    <tr>
+                        <td><label for="movie_name">Movie name<span class="star">*</span></label></td>
+                        <td><input type="text" name="movie_name" id="movie_name" required></td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="Movie_img">Movie image<span class="star">*</span></label></td>
+                        <td><input type="file" name="movie_img" id="Movie_img" accept="image/*"></td>
+                    </tr>
+                    <tr>
+                        <td><label for="hero">Hero<span class="star">*</span></label></td>
+                        <td>
+                            <select id="hero" name="hero" required>
+                                <option hidden>Select</option>
+                                <?php while($row = mysqli_fetch_array($hero_r)) {
+                                    echo "<option value=" . $row['hero_name'] . ">" . $row['hero_name'] . "</option>";
+                                }?>
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td><label for="heroine">Heroine<span class="star">*</span></label></td>
+                        <td>
+                            <select id="heroine" name="heroine" required>
+                                <option hidden>Select</option>
+                                <?php while($row = mysqli_fetch_array($heroine_r)) {
+                                    echo '<option>' . $row['heroine_name'] . '</option>';
+                                }?>
+                            </select>
+                        </td>
+                    </tr>
+                    
+                    <tr>
+                        <td><label for="release_year">Release year<span class="star">*</span></label></td>
+                        <td><input type="number" id="release_year" name="release_year"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <p><span class="star">*</span> indicates required field</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center"><input type="submit" value="Upload"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+<?php
+
+    require_once '../components/mail_db_connect.php';
+
+    if(isset($_GET['id']) && !empty($_GET['id'])) {
+        $id = $_GET['id'];
+        $id = mysqli_real_escape_string($mc_ma, $id);
+
+        $db_select = mysqli_select_db($mc_ma, $id);
+    
+        if (!$db_select) {
+            // Handle error if database is not found
+            die("Error selecting database: " . mysqli_error($mc_ma));
+        }
+
+        $query = "SHOW TABLES ";
+        $query_run = mysqli_query($mc_ma, $query);
+
+        $num_rows = mysqli_num_rows($query_run);
+
+        $res = mysqli_fetch_all($query_run, MYSQLI_ASSOC);
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../assets/css/sidebar.css">
+</head>
+<body>
+    <?php require_once '../components/sidebar1.php';?>
+    <div class="container">
+        <div class="content">
+            <h1>Total tables in <q><?php echo $id?></q> database: <?php echo $num_rows?></h1>
+            <table>
+                <tr>
+                    <td><b>Table name</b></td>
+                    <td><b>Rows</b></td>
+                    <td><b>Action</b></td>
+                </tr>
+                <?php foreach($res as $row){?>
+                <tr>
+                    <td><?php echo $table_name =  $row[key($row)]?></td>
+                    <td><?php $row_count = "SELECT * FROM `$table_name`";
+                        $query_exec = mysqli_query($mc_ma, $row_count); 
+                        
+                        echo $num_rows_exec = mysqli_num_rows($query_exec)?></td>
+                </tr>
+                <?php }?>
+            </table>
+            
+        </div>
+    </div>
+
+</body>
+</html>
+
+<?php } else {
+    header('Location: ./');
+}
+?>

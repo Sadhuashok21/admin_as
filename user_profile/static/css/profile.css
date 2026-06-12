@@ -1,0 +1,46 @@
+table tr td {
+    padding: .5rem;
+}
+
+input {
+    width: 300px;
+    height: 30px;
+    border-radius: .5rem;
+    padding-left: .3rem;
+    padding-right: .3rem;
+    background: transparent;
+    border: 1px solid #1E293B;
+}
+
+input[type=submit] {
+    background: #16A34A;
+    cursor: pointer;
+}
+
+.profile_full {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+body.active input {
+    color: white;
+}
+
+.profile_exist {
+    border: 1px solid white;
+    padding: .5rem;
+    border-radius: .5rem;
+    text-align: center;
+    margin-right: 2rem;
+}
+
+.profile_logo_exist {
+    width: 200px;
+    height: 200px
+}
+
+input[readonly] {
+    background-color: #030d22;
+    color: white;
+}

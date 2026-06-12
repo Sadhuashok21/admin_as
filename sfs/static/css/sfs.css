@@ -1,0 +1,123 @@
+a {
+    text-decoration: none;
+    color: black
+}
+
+.sidebar .fill.sfs {
+    display: block;
+}
+
+.sidebar .sfs {
+    display: none;
+}
+
+table {
+    border-collapse: collapse;
+
+}
+
+
+.head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 1rem;
+}
+
+input[type=submit] {
+    
+    background: #2563EB;
+    width: 100px;
+    height: 30px;
+    color: white;
+    cursor: pointer;
+    border-radius: .5rem;
+}
+
+
+.blueprints tr:nth-child(odd) {
+    background: #111827;
+}
+
+table tr td {
+    padding: .5rem;
+}
+
+.blueprint {
+    display: flex;
+    align-items: center;
+}
+
+.blueprint_name {
+    margin-lefT: .5rem;
+    width: 140px;
+    overflow-x: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin-right: .7rem;
+}
+
+.blueprint_img {
+    width: 80px;
+    height: 40px;
+    border-radius: .5rem;
+    margin: .2rem
+}
+
+.next {
+    width: 80px;
+    height: 30px;
+    border-radius: .3rem;
+    cursor: pointer;
+    background: #d4e7f1;
+}
+
+.next:hover {
+    background-color: #acb7bd;
+}
+
+
+.top_boxes {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.box {
+    border-radius: .5rem;
+    border: 1px solid green;
+    padding: 1rem;
+    margin: 1rem;
+    text-align: center;
+}
+
+
+
+.td {
+    padding: .5rem;
+    width: 100px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    display: flex;
+}
+
+.blueprints {
+    width: 100%;
+}
+
+
+/* sfs.html styles start */
+
+
+.compare_text {
+    font-size: .8rem;
+    opacity: .5rem;
+
+
+}
+
+
+
+
+/* sfs.html styles end */

@@ -1,0 +1,65 @@
+input[type=submit] {
+    background: #16A34A;
+    cursor: pointer;
+}
+body.active input {
+    color: white;
+}
+
+table tr td {
+    padding: .5rem
+}
+
+input {
+    width: 300px;
+    height: 30px;
+    border-radius: .5rem;
+    padding-left: .3rem;
+    padding-right: .3rem;
+    background: transparent;
+    border: 1px solid #1E293B;
+}
+
+
+.payments_cards {
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+
+body.active .payment, body.active .transactions, body.active .add_account, body.active .banks, body.active .manage_payments {
+    border: 1px solid white
+}
+
+.bank_img {
+    display: flex;
+    align-items: center;
+}
+
+.manage_payments .as {
+    width: 100px;
+    height: 100px;
+    cursor: auto;
+}
+
+.bank_info {
+    margin-left: 1rem;
+}
+
+.manage_payments {
+    width: 350px;
+}
+
+.manage {
+    color: blue;
+    text-align: center;
+    width: 350px;
+    cursor: pointer;
+}
+
+.payment, .transactions, .add_account, .banks, .manage_payments {
+    border: 1px solid black;
+    padding: .5rem;
+    border-radius: .5rem;
+    margin: .5rem;
+}

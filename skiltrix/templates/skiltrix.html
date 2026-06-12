@@ -1,0 +1,218 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+    <link rel="icon" href="{% static 'images/as_logo.webp' %}">
+</head>
+<body>
+    {% include 'sidebar.html' %}
+    <div class="container">
+        <div class="content">
+            <h1>Skiltrix</h1>
+            
+            <button onclick="makeCenter()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-type-bold" viewBox="0 0 16 16">
+                    <path d="M8.21 13c2.106 0 3.412-1.087 3.412-2.823 0-1.306-.984-2.283-2.324-2.386v-.055a2.176 2.176 0 0 0 1.852-2.14c0-1.51-1.162-2.46-3.014-2.46H3.843V13zM5.908 4.674h1.696c.963 0 1.517.451 1.517 1.244 0 .834-.629 1.32-1.73 1.32H5.908V4.673zm0 6.788V8.598h1.73c1.217 0 1.88.492 1.88 1.415 0 .943-.643 1.449-1.832 1.449H5.907z"/>
+                </svg>
+                
+            </button>
+
+
+            <s>s,gfkdhgu</s>
+            <div class="writer" contenteditable="true">
+
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+            function makeBold() {
+                const selection = window.getSelection();
+                
+                // Check if there's any selection
+                if (selection.rangeCount > 0) {
+                    // Check if the current selection is already bold
+                    const isBold = document.queryCommandState('bold');
+                    
+                    if (isBold) {
+                        // If it's already bold, remove the bold
+                        document.execCommand('bold');
+                    } else {
+                        // If it's not bold, apply bold
+                        document.execCommand('bold');
+                    }
+                } else {
+                    console.log('No text selected');
+                }
+            }
+
+            function makeItalic() {
+                const selection = window.getSelection();
+                
+                // Check if there's any selection
+                if (selection.rangeCount > 0) {
+                    // Check if the current selection is already bold
+                    const isBold = document.queryCommandState('italic');
+                    
+                    if (isBold) {
+                        // If it's already bold, remove the bold
+                        document.execCommand('italic');
+                    } else {
+                        // If it's not bold, apply bold
+                        document.execCommand('italic');
+                    }
+                } else {
+                    console.log('No text selected');
+                }
+            }
+
+
+            function makeSubScript() {
+                const selection = window.getSelection();
+                
+                // Check if there's any selection
+                if (selection.rangeCount > 0) {
+                    // Check if the current selection is already bold
+                    const isBold = document.queryCommandState('subscript');
+                    
+                    if (isBold) {
+                        // If it's already bold, remove the bold
+                        document.execCommand('subscript');
+                    } else {
+                        // If it's not bold, apply bold
+                        document.execCommand('subscript');
+                    }
+                } else {
+                    console.log('No text selected');
+                }
+            }
+
+ 
+            function makeSupScript() {
+                const selection = window.getSelection();
+                
+                // Check if there's any selection
+                if (selection.rangeCount > 0) {
+                    // Check if the current selection is already bold
+                    const isBold = document.queryCommandState('superscript');
+                    
+                    if (isBold) {
+                        // If it's already bold, remove the bold
+                        document.execCommand('superscript');
+                    } else {
+                        // If it's not bold, apply bold
+                        document.execCommand('superscript');
+                    }
+                } else {
+                    console.log('No text selected');
+                }
+            }
+
+            function makeDelete() {
+                const selection = window.getSelection();
+                
+                // Check if there's any selection
+                if (selection.rangeCount > 0) {
+                    // Check if the current selection is already bold
+                    const isBold = document.queryCommandState('del');
+                    
+                    if (isBold) {
+                        // If it's already bold, remove the bold
+                        document.execCommand('del');
+                    } else {
+                        // If it's not bold, apply bold
+                        document.execCommand('del');
+                    }
+                } else {
+                    console.log('No text selected');
+                }
+            }
+
+
+/* 
+            function makeStrike() {
+                const selection = window.getSelection();
+                
+                // Check if there's any selection
+                if (selection.rangeCount > 0) {
+                    // Check if the current selection is already bold
+                    const isBold = document.queryCommandState('strikeThrough');
+                    
+                    if (isBold) {
+                        // If it's already bold, remove the bold
+                        document.execCommand('strikeThrough');
+                    } else {
+                        // If it's not bold, apply bold
+                        document.execCommand('strikeThrough');
+                    }
+                } else {
+                    console.log('No text selected');
+                }
+            }
+ */
+
+ function makeStrike() {
+    const selection = window.getSelection();
+
+    if (selection.rangeCount > 0 && !selection.isCollapsed) {
+        const range = selection.getRangeAt(0);
+        const strike = document.createElement("justifyCenter");
+        strike.appendChild(range.extractContents());
+        range.insertNode(strike);
+        selection.removeAllRanges();
+        selection.addRange(range);
+    } else {
+        console.log('No text selected');
+    }
+}
+
+            /* function makeCenter() {
+                const selection = window.getSelection();
+                
+                // Check if there's any selection
+                if (selection.rangeCount > 0) {
+                    // Check if the current selection is already bold
+                    const isBold = document.queryCommandState('justifyCenter');
+                    
+                    if (isBold) {
+                        // If it's already bold, remove the bold
+                        document.execCommand('justifyCenter');
+                    } else {
+                        // If it's not bold, apply bold
+                        document.execCommand('justifyCenter');
+                    }
+                } else {
+                    console.log('No text selected');
+                }
+            }
+ */
+
+
+ function makeCenter() {
+    const selection = window.getSelection();
+    
+    if (selection.rangeCount > 0 && !selection.isCollapsed) {
+        const range = selection.getRangeAt(0);
+        const wrapper = document.createElement("div");
+        wrapper.style.textAlign = "right";
+        wrapper.appendChild(range.extractContents());
+        range.insertNode(wrapper);
+        selection.removeAllRanges();
+        selection.addRange(range);
+    } else {
+        console.log("No text selected");
+    }
+}
+
+    </script>
+
+        </div>
+    </div>
+</body>
+</html>

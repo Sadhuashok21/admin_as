@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Profile</title>
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+    <link rel="icon" href="{% static 'images/as_logo.webp' %}">
+</head>
+<body>
+    {% include 'sidebar.html' %}
+    <div class="container">
+        <div class="content">
+            <h1>your profile</h1>
+            <p>Welcome back <span class="profile_name"><b>{{name }}</b></span></p>
+            
+
+            <div class="profile_full">
+
+                <div class="profile_exist">
+                    <img src="<?php echo $profile?>" alt="Logo" class="profile_logo_exist">
+                    <p>{{ email }}</p>
+                    <p><b>Administrator</b></p>
+                </div>
+
+                <form action="" method="POST">
+                    <h2>Update profile information</h2>
+                    
+                    <table>
+                        <tr>
+                            <td><label for="name">Full name</label></td>
+                            <td><input type="text" name="name" id="name" value="{{ }}"></td>
+                        </tr>
+                        <tr>
+                            <td><label for="email">Email</label></td>
+                            <td><input type="email" value="" readonly></td>
+                        </tr>
+                        <tr>
+                            <td><label for="profile">Profile</label></td>
+                            <td><input type="file" accept="image/*" ></td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" align="center"><input type="Submit" value="Update"></td>
+                        </tr>
+                    </table>
+                </form>
+
+            </div>
+
+            <br><br><br>
+
+
+            <h2>Update password</h2>
+            <form action="" method="POST" border="1">
+                <table>
+                    <tr>
+                    </tr>
+                    <tr>
+                        <td><label for="old_pass">Old password</label></td>
+                        <td><input type="password" name="old_pass" placeholder="Old password" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="new_pass">New password</label></td>
+                        <td><input type="password" name="new_pass"  placeholder="New password" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="con_pass">Confirm password</label></td>
+                        <td><input type="password" name="con_pass" placeholder="Confirm password" required></td>
+                    </tr>
+                    <tr>
+                        <td colspann="2">Password must be greater than 7 characters.</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center"><input type="submit" value="Update password"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+    
+</body>
+</html>

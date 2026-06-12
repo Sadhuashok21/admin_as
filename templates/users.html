@@ -1,0 +1,35 @@
+<div class="users">
+    <table class="user_table">
+        <th>Profile</th>
+        <th>Name</th>
+        <th>Platform</th>
+        <th>Platform name</th>
+        <th>Status</th>
+        <th>Created time</th>
+
+        {% for user in users %}
+        <a href="edit?{{user.user_id}}">
+            <tr>
+                <td><img src="{{ user.profile }}" alt="logo" class="logo" loading="lazy"></td>
+                <td>
+                    <div class="name_det">
+                        {{ user.name }}<br>
+                        {{ user.email }}
+                    </div>
+                </td>
+                <td>{{ user.platform }}</td>
+                <td>{{ user.platform_name}}</td>
+                <td>
+                    {% if user.status == 'approved' %}
+                        <span class="dis_app d">{{ user.status }}</span>
+
+                    {% else %}
+                        <span class="dis_app">{{user.status }}</span>
+                    {% endif %}
+                </td>
+                <td>{{ user.time }}</td>
+            </tr>
+        </a>
+        {% endfor %}
+    </table>
+</div>

@@ -1,0 +1,573 @@
+<?php
+
+    require_once '../components/mail_db_connect.php';
+    require_once '../components/core.php';
+
+    if(login()) {
+        $user_id = getuserfield('user_id');
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Withdraw</title>
+    <link rel="stylesheet" href="../assets/css/sidebar.css">
+    <link rel="icon" href="../assets/images/as_logo.webp">
+    <link rel="stylesheet" href="../assets/css/bank.css">
+</head>
+<body>
+    <?php require_once '../components/sidebar1.php';?>
+    <div class="container">
+        <div class="content">
+
+
+            <div class="payments_cards">
+
+                <div class="payment">
+                    <h1>Payments</h1>
+                    <h1>Your earnings</h1>
+                    <span>$00.00</span>
+                    <span>$43.00</span> 
+
+                    <p>Paid monthly if the total is at least US$100.00 (your payout threshold)</p>
+                </div>
+
+                <div class="add_account">
+                    <span>No accounts found</span>
+                    <svg width="16" height="16" fill="currentColor" class="as as-plus-lg" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
+                    </svg>
+                </div>
+
+                <div class="transactions">
+                    <h1>Transactions</h1>
+                </div>
+
+                <div class="manage_payments">
+                    <h1>Payment to bank account</h1>
+
+                    <div class="bank_img">
+                        <svg width="16" height="16" fill="currentColor" class="as as-bank" viewBox="0 0 16 16">
+                            <path d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.5.5 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89zM3.777 3h8.447L8 1zM2 6v7h1V6zm2 0v7h2.5V6zm3.5 0v7h1V6zm2 0v7H12V6zM13 6v7h1V6zm2-1V4H1v1zm-.39 9H1.39l-.25 1h13.72z"/>
+                        </svg>
+                        <div class="bank_info">
+                            
+                            <span>STATE BANK OF INDIA ...431</span><br>
+                            <span>SADHU ASHOK KUMAR</span><br>
+                        </div>
+                    </div>
+                    <br>
+                    <hr color="blue">
+                    <center><span class="manage">Manage payments</span></center>
+                    
+                </div>
+
+            </div>
+
+            <div class="banks">
+                <form method="POST" action="">
+                    <h1>Bank Information</h1>
+                    <table>
+                        <tr>
+                            <td><label for="your_name">Your name on bank</label></td>
+                            <td><input type="text" name="yout_name" id="your_name" placeholder="Your name on bank"required></td>
+                        </tr>
+
+                        <tr>
+                            <td><label for="name">Name of Bank</label></td>
+                            <td><input type="text" name="name" id="name" placeholder="Name of bank" list="bank_details" required/></td>
+                        </tr>
+                        <tr>
+                            <td><label for="ifsc">IFSC Code</label></td>
+                            <td><input type="number" name="ifsc" id="ifsc" placeholder="IFSC code" required/></td>
+                        </tr>
+
+                        <tr>
+                            <td><label for="account_number">Account number</label></td>
+                            <td><input type="text" name="account_number" id="account_number" placeholder="Account number" required></td>
+                        </tr>
+
+                        <tr>
+                            <td><label for="account_number">Retype account number</label></td>
+                            <td><input type="text" name="account_number" placeholder="Retype account number" required></td>
+                        </tr>
+
+                        <tr>
+                            <td colspan="2" align="center"><input type="submit" value="Add bank account"/></td>
+                        </tr>
+
+                    </table>
+                
+                </form>
+            </div>
+          
+
+            
+            <datalist id="bank_details">
+                <option>AU Small Finance Bank</option>
+                <option>Abhinandan Urban Co-Op Bank Ltd</option>
+                <option>Abhyudaya Co- Operative Bank</option>
+                <option>Adarsh Co-Operative Bank</option>
+                <option>Ahmednagar Merchant's Co-operative Bank</option>
+                <option>Ahmednagar Shahar Sahakari Bank Ltd</option>
+                <option>Airtel Payments Bank</option>
+                <option>Ajantha Urban Co-Op Bank Ltd</option>
+                <option>Akhand Anand Co Operative Bank Itd</option>
+                <option>Allahabad Bank(Indian Bank)</option>
+                <option>Ambajogai Peoples Co-Operative Bank Ltd</option>
+                <option>Ambarnath Jai-Hind Co-op Bank Ltd</option>
+                <option>Amreli Nagarik Sahakari Bank Ltd</option>
+                <option>Andhra Bank (Union Bank)</option>
+                <option>Andhra Pradesh Grameena Vikas Bank</option>
+                <option>Andhra Pradesh Mahesh Co-Operative Urban Bank Ltd</option>
+                <option>Andhra Pradesh Grameena Bank</option>
+                <option>Apna Sahakari Bank</option>
+                <option>Arihant Urban Co-Operative Bank Ltd</option>
+                <option>Arunachal Pradesh Rural Bank</option>
+                <option>Arvind Sahakari Bank Ltd</option>
+                <option>Assam Gramin Vikash Bank</option>
+                <option>Axis Bank</option>
+                <option>Balasinor Nagarik Sahakari Bank Ltd</option>
+                <option>Balotra Urban Co-op bank Ltd</option>
+                <option>Banaskantha District Central Co-op Bank Ltd</option>
+                <option>Bandhan bank</option>
+                <option>Bank of America</option>
+                <option>Bank of Baroda</option>
+                <option>Bank of India</option>
+                <option>Bank of Maharashtra</option>
+                <option>Baran Nagrik Sahkari Bank Ltd, Baran</option>
+                <option>Baroda Gujarat Gramin Bank</option>
+                <option>Baroda Rajasthan Kshetriya Gramin Bank</option>
+                <option>Baroda UP Gramin Bank</option>
+                <option>Bassein Catholic Co-Operative Bank</option>
+                <option>Bhadradri Cooperative Urban Bank Ltd</option>
+                <option>Bhagini Nivedita Sahakari Bank Ltd.</option>
+                <option>Bharat Co-Operative Bank (Mumbai)</option>
+                <option>Bhavnagar DCB</option>
+                <option>Bhilwara Urban Co-operative Bank</option>
+                <option>Bombay Mercantile Co-Op Bank Ltd</option>
+                <option>CITI</option>
+                <option>CSB Bank</option>
+                <option>Canara Bank</option>
+                <option>Capital Small Finance Bank</option>
+                <option>Central Bank of India</option>
+                <option>Chaitanya Godavari Grameena Bank</option>
+                <option>Chartered Sahakari Bank Niyamitha</option>
+                <option>Chennai Central Co-op Bank Ltd.</option>
+                <option>Chattisgarh Rajya Sahakari Bank Mydt</option>
+                <option>Chittorgarh Urban Co-operative Bank Ltd</option>
+                <option>Citibank</option>
+                <option>Citizen Co-operative Bank Ltd., Noida</option>
+                <option>CitizenCredit Co-operative Bank Ltd</option>
+                <option>Citizens Co-Operative Bank Ltd</option>
+                <option>City Union Bank</option>
+                <option>Coastal Area Local Bank</option>
+                <option>Colour Merchants Co-Operative Bank Ltd</option>
+                <option>Corporation Bank(Union Bank)</option>
+                <option>DBS Bank</option>
+                <option>DCB Bank</option>
+                <option>DCCB MEDDAK</option>
+                <option>DINDIGUL CENTRAL COOPERATIVE BANK LTD</option>
+                <option>Dakshin Bihar Gramin Bank</option>
+                <option>Dapoli Urban Bank Co-Operative Bank Limited</option>
+                <option>Dattatray Maharaj kalambe Jaoli Sahakari bank Ltd, Mumbai</option>
+                <option>Dausa urban Co-Op Bank Ltd</option>
+                <option>Deendayal Nagari Sahakari Bank Ltd</option>
+                <option>Dena Bank (Bank of Baroda)</option>
+                <option>Deogiri Nagari Sahakari Bank Ltd Aurangabad</option>
+                <option>Deutsche Bank</option>
+                <option>Dhanera Mercantile Co-operative Bank Ltd</option>
+                <option>Dhanlaxmi Bank</option>
+                <option>Dharmapuri District Central Co-op Bank Limited</option>
+                <option>Dhule Vikas Sahakari Bank Ltd</option>
+                <option>Dombivali Nagri Sahakari Bank</option>
+                <option>ESAF Small Finance Bank</option>
+                <option>Equitas Small Finance Bank</option>
+                <option>Federal Bank</option>
+                <option>Federal Bank IPO</option>
+                <option>Fincare Small Finance Bank</option>
+                <option>Fingrowth Co-operative Bank Ltd</option>
+                <option>Fino Payments Bank</option>
+                <option>GP Parsik Bank</option>
+                <option>GS Mahanagar Co-op bank</option>
+                <option>Garagepreneurs Internet Private Limited</option>
+                <option>Godavari Urban Co-Op Bank</option>
+                <option>Guardian Ambuja Co Op bank Ltd</option>
+                <option>Guntur Urban Bank</option>
+                <option>HDFC Bank</option>
+                <option>HSBC</option>
+                <option>Himachal Pradesh Gramin Bank</option>
+                <option>Himatnagar Nagarik Sahakari Bank Limited</option>
+                <option>Hutatma Sahakari Bank</option>
+                <option>ICICI Bank</option>
+                <option>IDBI Bank</option>
+                <option>IDFC First Bank</option>
+                <option>India Post Payment Bank</option>
+                <option>Indian Bank</option>
+                <option>Indian Overseas Bank</option>
+                <option>Indore Cloth Market Cooperative Bank Ltd.</option>
+                <option>Indore Paraspar Sahakari Bank Ltd</option>
+                <option>Indore Premier Co-Op. Bank Ltd, Pimpri</option>
+                <option>Indusind Bank</option>
+                <option>Irinjalakuda Town Co Operative Bank Ltd</option>
+                <option>J&K Grameen Bank</option>
+                <option>Jalgaon Janata Sahkari Bank</option>
+                <option>Jalna Merchants Co-Op Bank Ltd</option>
+                <option>Jammu and Kashmir Bank</option>
+                <option>Jana Small Finance Bank</option>
+                <option>Janaeva Sahakari Bank Ltd Pune</option>
+                <option>Janata Bank Ajara</option>
+                <option>Janata Sahakari Bank</option>
+                <option>Janata Seva Co-operative Bank Ltd</option>
+                <option>Jharkhand Rajya Gramin Bank</option>
+                <option>Jijamata Mahila Sahakari Bank Ltd, Pune</option>
+                <option>Jila Sahakari Kendriya Bank Maryadit Raipur</option>
+                <option>Jila Sahakari Kendriya Bank Mydt. Durg</option>
+                <option>Jila Sahkari Kendriya Bank Maryadit Khargone</option>
+                <option>Jio Payments Bank</option>
+                <option>Jivan Commercial Co Op Bank Ltd</option>
+                <option>Jodhpur Nagrik Sahakari Bank Ltd</option>
+                <option>Kaijsb Bank - Ichalkaranji</option>
+                <option>Kankaria Maninagar Nagrik Sahakari Bank Ltd</option>
+                <option>Karimnagar DCCB</option>
+                <option>Karnataka Bank</option>
+                <option>Karnataka Mahila Sahakara Bank Niyamitha</option>
+                <option>Karnataka Vikas Grameena Bank</option>
+                <option>Karur Vysya Bank</option>
+                <option>Kashi Gomati Samyut Grameen Bank</option>
+                <option>Kashmir Mercantile Cooperative Bank Ltd.</option>
+                <option>Kerala Gramin Bank</option>
+                <option>Khattri Co-op Bank</option>
+                <option>Kokan Mercantile Co Op Bank Ltd</option>
+                <option>Kolhapur Dist.Central Co-Op Bank Ltd</option>
+                <option>Kolhapur Mahila Sahakari Bank Ltd.</option>
+                <option>Kopargaon Peoples Co Op Bank Ltd</option>
+                <option>Kotak Mahindra Bank</option>
+                <option>Kottakkal Co-Op Urban Bank Ltd</option>
+                <option>Kottayam Co-operative Urban Bank Ltd</option>
+                <option>krishna Bhima Samruddhi Local Area Bank</option>
+                <option>Lonavala Sahakari Bank Ltd</option>
+                <option>Madhya Pradesh Rajya Sahakari Bank Maryadit</option>
+                <option>Mahanagar Nagrik Sahakari Bank Mydt</option>
+                <option>Maharashtra Gramin Bank</option>
+                <option>Maharashtra State Co-op Bank</option>
+                <option>Mahatma Fule Urban Co-Operative Bank Ltd.</option>
+                <option>Mahaveer Co-operative Urban bank Limited</option>
+                <option>Mahesh Sahakari Bank Ltd, Pune</option>
+                <option>Mahesh Urban Co-operative Bank, Parbhani</option>
+                <option>Mahila Nagrik Sahakari Bank, Mahasamund</option>
+                <option>Malviya Urban Co Operative Bank Ltd</option>
+                <option>Manipur Rural Bank</option>
+                <option>Mann Deshi Mahila Sahkari Bank Ltd</option>
+                <option>Mansing Co-Operative Bank Ltd</option>
+                <option>Manvi Pattana Souharda Sahakari Bank NI</option>
+                <option>Maratha Cooperative Bank</option>
+                <option>Meghalaya Rural Bank</option>
+                <option>Merchants Souharda Sahakara Bank Chitradurga</option>
+                <option>Mizoram Co-Operative Apex Bank Ltd</option>
+                <option>Mizoram Rural Bank</option>
+                <option>Model Co-Operative Bank Ltd</option>
+                <option>NKGSB Bank</option>
+                <option>NSDL Payments Bank</option>
+                <option>Nagrik Sahakari Bank Maryadhit Vidisha</option>
+                <option>Nagrik Sahakari Bank Maryadit Gwalior</option>
+                <option>Nainital Bank</option>
+                <option>Nandani Sahakari Bank Ltd. Nandani</option>
+                <option>Naroda Nagarik Co-operative Bank Ltd</option>
+                <option>Navi Mumbai Co-operative Bank Limited</option>
+                <option>Navsarjan Industrial Co-Op Bank Ltd</option>
+                <option>North East Small Finance Bank Limited</option>
+                <option>Nutan Nagrik Sahakari Bank</option>
+                <option>Oriental Bank Of Commerce (Punjab National Bank)</option>
+                <option>PDP Bank Karad</option>
+                <option>Pali Urban Co Operative Bank Ltd</option>
+                <option>Palus Sahakari Bank Ltd</option>
+                <option>Paschim Banga Gramin Bank</option>
+                <option>Patan Nagarik Sahakari Bank Ltd</option>
+                <option>Pavana Sahakari Bank</option>
+                <option>Paypoint India network Pvt Ltd</option>
+                <option>Paytm Payments Bank</option>
+                <option>People's Urban Co-operative Bank Ltd., Tripunitura</option>
+                <option>Peoples Co-operative Bank Ltd Dholka</option>
+                <option>Poornawadi Nagrik Sahakari Bank Ltd, Beed</option>
+                <option>Pragathi Krishna Gramin Bank</option>
+                <option>Prerana Co-Operative Bank Ltd</option>
+                <option>Prime Co-Operative Bank Ltd.</option>
+                <option>Priyadarshani Nagari Sahakari Bank Maryadit, Jalna</option>
+                <option>Pune Cantonment Sahakari Bank Ltd</option>
+                <option>Pune Peoples Coop Bank Ltd, Pune</option>
+                <option>Pune Urban Co Operative Bank Ltd</option>
+                <option>Punjab Gramin Bank</option>
+                <option>Punjab National Bank</option>
+                <option>Punjab and Sind Bank</option>
+                <option>RBL</option>
+                <option>Raigad District Central Co-Operative Bank Ltd</option>
+                <option>Rajadhani Co-operative urban Bank</option>
+                <option>Rajapur Urban Cooperative Bank Ltd ajapur</option>
+                <option>Rajarambapu Sahakari Bank Ltd</option>
+                <option>Rajarshi Shahu Sahakari Bank Ltd, Pune</option>
+                <option>Rajasthan Marudhara Gramin Bank</option>
+                <option>Rajgurunagar Sahakari Bank Ltd</option>
+                <option>Rajkot Nagrik Sahakari Bank</option>
+                <option>Rajkot Peoples Co-operative Bank Ltd</option>
+                <option>Rani Channama Mahila Sahakari Bank Niyamit, Belagavi</option>
+                <option>SBM Bank India Ltd</option>
+                <option>Sadhana Sahakari Bank Ltd. Nagpur</option>
+                <option>Sadhana Sahakari bank Ltd, Hadapsar Pune.</option>
+                <option>Saibaba Nagari Sahakari Bank Maryadit Sailu</option>
+                <option>Samarth Sahakari Bank Ltd., Solapur</option>
+                <option>Samata Co-Operative Development Bank Ltd</option>
+                <option>Samata Sahakari Bank Ltd, Mumbai</option>
+                <option>Sampada Sahakari Bank Ltd., Pune</option>
+                <option>Samruddhi Co-Operative Bank Nagpur</option>
+                <option>Sandur Pattana Souharda Sahakari Bank</option>
+                <option>Sant Sopankaka Sahakari Bank Ltd.</option>
+                <option>Sarakari Naukarara Sahakari Bank Niyamit Vijayapura</option>
+                <option>Saraspur Nagarik Co Operative Bank Ltd</option>
+                <option>Saraswat Bank</option>
+                <option>Sardar Bhiladwala Pardi Peoples Coop Bank Ltd</option>
+                <option>Sardar Vallabhbhai Sahakari Bank Ltd</option>
+                <option>Sarva Haryana Gramin Bank</option>
+                <option>Sarva UP Gramin Bank</option>
+                <option>Sarvodaya Commercial Co Op Bank Ltd</option>
+                <option>Saurashtra Gramin Bank</option>
+                <option>Shahu Bank Beed</option>
+                <option>Sharad Sahakari bank Ltd Manchar</option>
+                <option>Shivalik Small Finance Bank</option>
+                <option>Shree Basaveshwar Urban Co. Op. Bank ltd.,Ranebennur</option>
+                <option>Shree Dharati Bank</option>
+                <option>Shree Kadi Nagarik Sahakari Bank Ltd</option>
+                <option>Shree Mahalaxmi Bank Ltd, Gokak</option>
+                <option>Shree Mahavir Sahakari Bank Ltd</option>
+                <option>Shree Mahesh Co-Op Bank Ltd. Nashik</option>
+                <option>Shree Mahuva Nagrik Sahkari Bank Ltd</option>
+                <option>Shree Panchganga Nagari Sahakari bank Itd</option>
+                <option>Shree Vardhaman Sahakari Bank Ltd</option>
+                <option>Shree Warana Sahakari Bank Ltd</option>
+                <option>Shri Adinath Co-op Bank Ltd. Ichalkaranji</option>
+                <option>Shri Arihant Co-Op Bank Ltd</option>
+                <option>Shri Basaveshwar Sahakari Bank Niyamit., Bagalkot</option>
+                <option>Shri Bharat Urban Co-op Bank Ltd Jaysingpur</option>
+                <option>Shri Chatrapati Shivaji Maharaj Sahakari Bank Niyamith</option>
+                <option>Shri Janata Sahakari Bank Ltd Halol</option>
+                <option>Shri Mahalaxmi Co-Operative Bank Ltd., Kolhapur</option>
+                <option>Shri Mahila Sewa Sahakari Bank Ltd</option>
+                <option>Shri Rajkot District Central Cooperative Bank</option>
+                <option>Shri Swami Samarth Sahakari Bank Ltd, Nighoj</option>
+                <option>Shri Veershaiv Co-Op Bank Ltd.</option>
+                <option>Shrikrishna Co-Operative Bank Ltd., Umred</option>
+                <option>Smriti Nagrik Sahakari Bank Maryadit Mandsaur</option>
+                <option>South Indian Bank</option>
+                <option>Sree Charan Bank</option>
+                <option>Sreenidhi Souharda Sahakari Bank Niyamitha</option>
+                <option>Sri Rama Co-operative Bank Ltd</option>
+                <option>Sri Sudha Co Op Bank</option>
+                <option>Sri Vasavamba Cooperative Bank Ltd</option>
+                <option>Standard Chartered Bank</option>
+                <option>State Bank Of India</option>
+                <option>Sterling Urban Co Operative Bank Ltd</option>
+                <option>Suco Souharda Sahakari Bank Ltd</option>
+                <option>Sudha Co-operative Urban Bank Ltd</option>
+                <option>Sundarlal Swaji Urban Co-op Bank Ltd, Jintur</option>
+                <option>Surat National Co-Operative Bank Limited</option>
+                <option>Surat People Cooperative Bank</option>
+                <option>Suryoday Small Finance Bank</option>
+                <option>Suvarnayug Sahakari Bank</option>
+                <option>Svc Co-operative Bank</option>
+                <option>Swatantrya Senani Late Shripal Alase (Kaka) Kurundwad Urban Co-Op Bank Ltd; Kurundwad</option>
+                <option>Syndicate Bank (Canara Bank)</option>
+                <option>THE BARODA CITY CO.OPERATIVE BANK LTD</option>
+                <option>THE ERODE DISTRICT CENTRAL CO-OPERATIVE BANK LTD</option>
+                <option>THE TIRUCHIRAPALLI DISTRICT CENTRAL COOPERATIVE BANK LTD</option>
+                <option>THE VELLORE DISTRICT CENTRAL CO-OP BANK LTD.</option>
+                <option>TJSB Sahakari Bank</option>
+                <option>Tamil Nadu State APex Co-op Bank Ltd</option>
+                <option>Tamilnad Mercantile Bank</option>
+                <option>Telanaga Grameena Bank</option>
+                <option>Telangana State Co-op Apex Bank</option>
+                <option>Textile Traders Co-Operative Bank Ltd</option>
+                <option>Thane Bharat Sahakari Bank</option>
+                <option>The A.P.Raja Rajeswari Mahila Co Operative Urban Bank Ltd</option>
+                <option>The Abhinav Sahakari Bank Ltd, Mumbai</option>
+                <option>The adarsh Co-operative Urban Bank Ltd.</option>
+                <option>The Agrasen Co-operative Urban Bank Ltd</option>
+                <option>The Ahmedabad District Co-Operative Bank</option>
+                <option>The Ahmedabad Merchantile Co-op Bank</option>
+                <option>The Ahmednagar District Central Coop Bank Ltd</option>
+                <option>The Ajara Urban Co Operative Bank Ltd, Ajara</option>
+                <option>The Akola District Central Co-Operative Bank Ltd., Akola</option>
+                <option>The Akola Janata Commercial Cooperative Bank Limited</option>
+                <option>The Akola URban Co-op Bank Limited, Akola</option>
+                <option>The Amravati Zilla Parishad Shikshak Sahakari Bank Ltd</option>
+                <option>The Anand Mercantile Co-Op Bank Ltd.</option>
+                <option>The Andhra Pradesh State Co-operative Bank</option>
+                <option>The Associate Co Operative Bank Ltd</option>
+                <option>The Banaskantha Mercantile Cooperative Bank Ltd</option>
+                <option>The Baramati Sahakari Bank</option>
+                <option>The Baroda Central Co-op Bank</option>
+                <option>The Bellary District Coop Central Bank Ltd</option>
+                <option>The Bhagyalakashmi Mahila Sahakari Bank Ltd</option>
+                <option>The Bhagyodaya Co-operative Bank Ltd</option>
+                <option>The Bharuch District Central Co-operative Bank Ltd</option>
+                <option>The Bhavana Rishi Co Op Urban Bank Ltd</option>
+                <option>The Bhuj Commercial Co-Operative Bank Ltd</option>
+                <option>The Bicholim Urban Cooperative Bank Ltd</option>
+                <option>The Business Co op Bank Ltd</option>
+                <option>The Chandwad Merchant Co-op bank Ltd., Chandwad</option>
+                <option>The Chembur Nagarik Sahakari Bank Ltd, Mumbai</option>
+                <option>The Chiplun Urban Co-Operative Bank Ltd</option>
+                <option>The Coimbatore District Central Co-op Bank Limited</option>
+                <option>The Commerical Co Op Bank Ltd, Kolhapur</option>
+                <option>The Commerical Co-Operative Bank ltd, Jamnagar</option>
+                <option>The Coop Bank of Mehsana Ltd</option>
+                <option>The Cosmos Co-Operative Bank Ltd</option>
+                <option>The Cuddalore District Central Co-op Bank Limited</option>
+                <option>The Dahod Mercantile Co operative Bank Ltd</option>
+                <option>The Dahod Urban Coop Urban Bank Ltd</option>
+                <option>The Darussalam Co-Operative Bank Ltd.</option>
+                <option>The Eenadu Coop Urban Bank Ltd</option>
+                <option>The Financial Co-Operative bank Ltd.</option>
+                <option>The Gadchiroli District Central Co Op Bank Ltd.</option>
+                <option>The Gandevi Peoples Co operative Bank Ltd</option>
+                <option>The Gandhidham Co-OPerative Bank Limited</option>
+                <option>The Gandhinagar Nagarik Co-op Bank Ltd</option>
+                <option>The Gayatri Cooperative Urban BAnk Ltd</option>
+                <option>The Godhra URban Co Op Bank Ltd</option>
+                <option>The Greater Bombay Co-operative Bank Limited</option>
+                <option>The Gujarat State Cooperative Bank</option>
+                <option>The Hassan DCC Bank Pvt Ltd</option>
+                <option>The Hasti Co-operative Bank</option>
+                <option>The Himachal Pradesh State Co-operative Bank Ltd</option>
+                <option>The Jalgaon Peoples Co-Op. Bank Ltd</option>
+                <option>The Jamkhandi Urban Co-operative Bank Ltd</option>
+                <option>The Jampeta C0-Operative Urban Bank Ltd</option>
+                <option>The Janakalyan Sahakari Bank Ltd.</option>
+                <option>The Junagadh Commerical Co-op Bank Ltd, Junagadh</option>
+                <option>The Junagadh Jilla Sahakari Bank Ltd</option>
+                <option>The Kaira District Central Co0operative Bank</option>
+                <option>The Kakatiya Commerical Urban Bank Ltd</option>
+                <option>The Kalupur Commercial Co-operative Bank</option>
+                <option>The Kalyan Janata Sahakari Bank</option>
+                <option>The Kanakamahalakshmi Co-operative Bank Ltd</option>
+                <option>The Kangra Central Cooperative Bank Ltd</option>
+                <option>The Kanyakumari District Central Co-operative Bank Ltd</option>
+                <option>The Karnataka State Co-Operative Apex Bank Ltd</option>
+                <option>The Karnavati Co op Bank</option>
+                <option>The Kerala State Co-operative Bank Ltd</option>
+                <option>The Khamgaon Urban Co-Operative Bank Ltd</option>
+                <option>The Kodinar Taluka Cooperative Banking Union Ltd.</option>
+                <option>The Kodungallur Town Co-op Bank Ltd</option>
+                <option>The Kolhapur Bank Urban Co-operative Bank Ltd</option>
+                <option>The Kranthi Cooperative Urban Bank Ltd</option>
+                <option>The Kukarwada Nagrik Sahakari Bank  Ltd</option>
+                <option>The Kumbakonam Central Co-op Bank Limited</option>
+                <option>The Lunawada Peoples Coop Bank Ltd</option>
+                <option>The Madurai District Central Co-op Bank Limited</option>
+                <option>The Maharashtra Mantralaya And Allied Offices Co-operative Bank Ltd</option>
+                <option>The Mahaveer Co-Operative Bank Ltd</option>
+                <option>The Malad Sahakari Bank Ltd</option>
+                <option>The Mandvi Nagrik Sahakari Bank Ltd</option>
+                <option>The Mehsana Nagrik Sahakari Bank Ltd</option>
+                <option>The Mehsana Urban Co-Operative Bank</option>
+                <option>The Modasa Nagrik Sahakari Bank Ltd</option>
+                <option>The Municipal Nagrik Sahakari Bank Ltd</option>
+                <option>The Muslim Co-op Bank</option>
+                <option>The Nanded Merchants Coop Bank Ltd Nanded</option>
+                <option>The Nandura Urban Coop Bank Ltd Nandura</option>
+                <option>The National Co-Operative Bank Ltd, Mumbai</option>
+                <option>The Navnirman Co-operative Bank  Ltd.</option>
+                <option>The Nawanagar Co operative Bank Ltd</option>
+                <option>The New Urban Co-Operative Bank Ltd Rampur</option>
+                <option>The Nilgiris District Central Coop Bank Ltd</option>
+                <option>The Panchmahal District Co-operative Bank Ltd</option>
+                <option>The Pimpalagaon Merchants Co-Op Bank Ltd</option>
+                <option>The Pochampally Cooperative Urban Bank Ltd</option>
+                <option>The Pratap Co-Operative Bank Ltd</option>
+                <option>The Pudukkottai District Central Co-op Bank Limited</option>
+                <option>The Raipur Urban Mercantile Co-op Bank</option>
+                <option>The Rajasthan State Co-Operative Bank Ltd</option>
+                <option>The Rajkot Commercial Co Op Bank Ltd</option>
+                <option>The Ramanathapuram District Central Co op Bank Ltd</option>
+                <option>The Ranuj Nagrik Sahakari Bank Ltd</option>
+                <option>The SSK Co-operative Bank</option>
+                <option>The Sabarkantha District Central Co Op Bank Ltd</option>
+                <option>The Salem District Central Co-op Bank Limited</option>
+                <option>The Sangamner Merchants Co Operative Bank Ltd</option>
+                <option>The Sarvodaya Nagrik Sahkari Bank Ltd</option>
+                <option>The Satara District Central `Co-Op Bank Ltd.,Satara</option>
+                <option>The Satara Sahakari  Bank Ltd</option>
+                <option>The Saurashtra Co-op Bank Ltd</option>
+                <option>The Shahada Peoples Coop Bank LTD</option>
+                <option>The Sindhudurg DCC Bank</option>
+                <option>The Sirsi Urban Sahakari Bank Ltd</option><option>The</option>
+                <option>The Sivagangai District Central Coop Bank Ltd</option>
+                <option>The Surat District Co Op Bank Ltd</option>
+                <option>The Surat Mercantile Co Op Bank Ltd</option>
+                <option>The Sutex Co-op. Bank</option>
+                <option>The Thane District Central Co Op Bank Ltd</option>
+                <option>The Thanjavur Central cooperative Bank Ltd</option>
+                <option>The Thoothukudi District Central Co-op Bank Limited</option>
+                <option>The Tiruvannamalai District Central Coop Bank Limited</option>
+                <option>The Udaipur Mahila Samridhi Urban Co-operative Bank</option>
+                <option>The Udaipur Mahila Urban Co-Operative Bank</option>
+                <option>The Udaipur Urban Co-Operative Bank Ltd.</option>
+                <option>The Udupi Town Co-op Bank Ltd, Udupi</option>
+                <option>The Urban Co Op Bank Ltd Dharangaon</option>
+                <option>The Uttarsanda Peoples Coop Bank Ltd</option>
+                <option>The Vallabh Vidyanagar Commercial Co Op Bank Ltd.</option>
+                <option>The Varachha Co-Op Bank</option>
+                <option>The Veraval peoples Coop Bank Ltd</option>
+                <option>The Vijay Cooperative Bank Ltd.</option>
+                <option>The Villupuram District Central Co-op Bank Limited</option>
+                <option>The Virudhunagar District Central Cooperative Bank Ltd</option>
+                <option>The Visakhapatnam Cooperative Bank Ltd</option>
+                <option>The Vishweshwar Sahakari Bank, Pune (Multi-State)</option>
+                <option>Tirupati Urban Co-op Bank Ltd</option>
+                <option>Transcorp Intl Itd</option>
+                <option>Tripura Gramin Bank</option>      
+                <option>Tripura State Cooperative Bank Ltd</option>
+                <option>UCO Bank</option>
+                <option>Ujjivan Small Finance Bank</option>
+                <option>Unimoni India</option>
+                <option>Union Bank of India</option>
+                <option>Union Coop Bank Ltd</option>
+                <option>United Bank of India(Punjab National Bank)</option>
+                <option>Unity Small Finance Bank Limited </option>
+                <option>Unjha Nagarik Sahakari Bank Ltd</option>
+                <option>Urban Co-operative Bank Ltd, Bareily</option>
+                <option>Utkarsh Small Finance Bank Ltd</option>
+                <option>Uttar Pradesh Co-operative Bank Ltd</option>
+                <option>Uttarkhand Gramin Bank</option>
+                <option>VIDARBHA MERCHANTS URBAN COOP BANK LTD., HINGANGHAT</option>
+                <option>Vaishya Nagari Sahakari Bank Ltd Parbhani</option>
+                <option>Vaishya Sahakari Bank Ltd., Mumbai</option>
+                <option>Valmiki Urban Co-op Bank Ltd., Pathri</option>
+                <option>Valsad District Central Co-op Bank Ltd</option>
+                <option>Vardhaman Mahila Co-op. Urban Bank Ltd.</option>
+                <option>Vasai Janata Sahakari Bank Ltd</option>
+                <option>Vasai Vikas Sahakari Bank</option>
+                <option>Vasundhara Mahila Nagari Sahakari Bank Ltd, Ambejogai</option>
+                <option>Veerashaiva Sahakari Bank Ltd</option>
+                <option>Vijay Commercial Co operative Bank Ltd</option>
+                <option>Vijaya Bank (Bank of Baroda)</option>
+                <option>Vikas Souharda Co-operative Bank</option>
+                <option>Vikramaditya Nagrik Sahakari Bank</option>
+                <option>Warangal Urban Co-op. Bank Ltd</option>
+                <option>Yadagiri Lakshmi Narasimha Swamy Urban Bank</option>
+                <option>Yes Bank</option>
+            </datalist>
+
+
+        </div>
+    </div>
+
+    <script src="../assets/js/sidebar.js" async></script>
+</body>
+</html>
+<?php } else {
+    header('Location: '. $redirect);
+}
+?>

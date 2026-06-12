@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Upload Category (SFS) | Ascentracore Solutions{% endblock%}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'css/sfs.css' %}" />
+{% endblock %}
+
+{% block sidebar %}
+    {% include 'sidebar.html' %}
+{% endblock %}
+{% block content %}
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        <div class="head">
+
+            <h1>Upload Blueprint</h1>
+            <input type="submit" />
+        
+        </div>
+        <label for="name"> Name </label>
+        <input type="text" name="name" id="name" class="input_field" placeholder="Name..." required/>
+
+        <select>
+            <option hidden>Select Type</option>
+            <option value="bp">Blueprint</option>
+            <option value="pla">Planets and Worlds</option>
+        </select>
+
+        <div class="file">
+            <input type="file" name="images" accept="image/*" multiple required/>
+        </div>
+        <div class="file">
+            <input type="file" name="zipfile" accept=".zip" />
+        </div>
+
+        <input type="text" name="link" placeholder="https://" />
+    </form>
+{% endblock %}

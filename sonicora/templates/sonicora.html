@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SonicOra</title>
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+    <link rel="icon" href="{% static 'images/as_logo.webp' %}">
+    <link rel="stylesheet" href="{% static 'css/sonicora.css' %}">
+</head>
+<body>
+    {% include 'sidebar.html' %}
+    <div class="container">
+        <div class="content">
+            <h1>Sonicora</h1>
+
+            <div class="total_con">
+                <span class="">Total songs: <span><?php echo $num_rows ?></span></span>
+                <br><span class="">Total telugu songs: <span><?php  echo "";?></span></span>
+                <br><span  class="">Total movies: <span><?php echo $num_movies?></span></span>
+            </div>
+
+            <div class="movies">
+                <h2>Movies</h2>
+
+                <table border="1">
+                    {% for movie in movies %}
+                    <tr>
+
+                        <td><img src="https://www.ashokworld.in/assets/music/images/<?php echo $row['song_img'];?>" width="40" height="40">
+                            {{ movie.movie_name }}</td>
+                        <td>{{ movie.hero }}</td>
+                    </tr>
+
+                    {% endfor %}
+                </table>
+            </div>
+
+            <div class="music_upload">
+                <h2>Upload Movies</h2>
+                
+                <a href="{% url 'sonicora:movie_upload' %}"><button>Upload movies</button></a>
+                <a href="{% url 'sonicora:song_upload' %}"><button>Upload songs</button></a>
+                <a href="{% url 'sonicora:hero_upload' %}"><button>Upload hero</button></a>
+                <a href="uploads/heroine"><button>Upload heroine</button></a>
+            </div>
+
+            <div class="movie_upload">
+            </div>
+     
+
+        </div>
+    </div>
+</body>
+</html>

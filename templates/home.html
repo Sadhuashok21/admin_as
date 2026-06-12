@@ -1,0 +1,99 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin panel</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+    <link rel="icon" href="{% static 'images/as_logo.webp' %}">
+    <style>
+        .sidebar .home {
+            display: none;
+        }
+        .sidebar .fill.home {
+            display: block;
+            background: #0F172A;
+            border-radius: .3rem;
+        }
+    </style>
+</head>
+<body>
+
+    {% include 'sidebar.html' %}
+    <div class="container">
+        <div class="content">
+            <div class="total_box">
+                <div class="total total_views">
+                    <span class="">Total Views: 100</span>
+                </div>
+                <div class="total total_blueprints">
+                    <span class="">Total blueprints: 1223</span>
+                </div>
+                <div class="total total_blueprints">
+                    <span class="">Approved blueprints: 1223</span>
+                </div>
+            </div>
+
+            <div class="blueprints">
+                <h2>Analytics</h2>
+                <div class="analytics_date">
+                    <input type="date" name="analytics_date_prev" id="prevDate">
+                    <input type="date" name="analytics_date" id="currentDate">
+
+                    <div class="blueprint_graph">
+                        
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="users">
+                <h1>Recent Users </h1>
+                <table class="user_table">
+                    <th>Profile</th>
+                    <th>Name</th>
+
+                    {% for user in users %}
+                    <a href="edit?{{user.user_id}}">
+                        <tr>
+                            <td><img src="{{ user.profile }}" alt="logo" class="logo" loading="lazy"></td>
+                            <td>
+                                <div class="name_det">
+                                    {{ user.name }}<br>
+                                    {{ user.email }}
+                                </div>
+                            </td>
+                        </tr>
+                    </a>
+                    {% endfor %}
+                </table>
+            </div>
+
+
+        </div>
+    </div>
+    <script>
+
+        // Get the current date
+        const currentDate = new Date();
+        const prevDate = new Date()
+        prevDate.setDate(currentDate.getDate() - 7);
+        
+
+        
+        // Format the date as YYYY-MM-DD (the format for the 'date' input type)
+        const formattedDate = currentDate.toISOString().split('T')[0];
+        const prDate = prevDate.toISOString().split('T')[0];
+        
+        // Set the value of the input field to the formatted date
+        document.getElementById('currentDate').value = formattedDate;
+        document.getElementById('prevDate').value = prDate;
+      </script>
+
+
+</body>
+</html>
+

@@ -1,0 +1,92 @@
+
+.blueprint_ima {
+    display: grid;
+    justify-items: center;
+
+}
+
+.blueprint_icons_img {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: 2rem;;
+}
+
+.blueprint_icons {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100px
+}
+
+.thumbnail {
+    display: flex;
+    align-items: center;
+
+}
+
+.thumbnail button, .preview_image button {
+    margin-left: .5rem;
+    background: #2fa5cb;
+    width: 150px;
+    height: 30px;
+    border-radius: .4rem;;
+    cursor: pointer;
+}
+
+.blueprint_image {
+    width: 200px;
+    height: 100px;
+    border-radius: .5rem;
+}
+
+.delete {
+    color: red;
+    display: flex;
+    align-items: center;
+
+}
+
+
+.editable_blueprint {
+    display: flex;
+}
+
+
+.editable input[readonly] {
+    background-color: rgb(202, 202, 202);
+}
+
+.editable table td {
+    padding: .5rem;
+}
+
+.editable input, select {
+    height: 25px;
+    padding: .2rem;
+    width: 180px;
+    border-radius: .5rem;
+    padding-left: .4rem;
+    padding-right: .3rem;
+}
+
+input[type=submit] {
+    background: #2fa5cb;
+    height: 30px;
+    cursor: pointer;
+}
+
+input[type=submit]:hover, .thumbnail button:hover, .preview_image button:hover {
+    background: #2e91b3;
+}
+
+.preview_images {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.preview_image {
+    display: grid;
+    width: 200px
+}

@@ -1,0 +1,53 @@
+<?php
+
+    require_once '../../components/mail_db_connect.php';
+    require_once '../../components/core.php';
+    
+    if (login()) {
+
+        if(isset($_POST['hero_name']) && !empty($_POST['hero_name'])) {
+            $hero_name = $_POST['hero_name'];
+            $hero_id = unique_id();
+            $query = "INSERT INTO `heroes` 
+            (`id`, `hero_name`, `hero_id`, `status`, `time`) 
+            VALUES 
+            (NULL, '$hero_name', '$hero_id', 'approved', CURRENT_TIMESTAMP())";
+            
+            $query_run = mysqli_query($mc_ma, $query);
+        }
+
+
+?>
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload hero</title>
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+    <link rel="icon" href="{% static 'images/as_logo.webp' %}">
+</head>
+<body>
+    {% include 'sidebar.html' %}
+    <div class="container">
+        <div class="content">
+
+            <form action="" method="POST">
+                <table>
+                    <tr>
+                        <td><label for="song_name">Hero name<span class="star">*</span></label></td>
+                        <td><input type="text" name="hero_name" id="song_name" required></td>
+                    </tr>
+                    <tr>
+                        <td align="center" colspan="2"><input type="submit" value="Upload"></td>
+                    </tr>
+                </table>
+            </form>
+
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,332 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    font-size: 16px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+
+:root {
+    --success: #16A34A;
+    --warning: #F59E0B;
+    --danger: #DC2626;
+    --li-txt: #111827;
+    --da-text: #E5E7EB;
+    --li-back: #F9FAFB;
+    --da-back: #0F172A;
+    --li-side: #1E293B;
+    --da-side: #1E293B;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    background: var(--li-back);
+}
+
+
+body.active {
+    background: var(--da-back);
+    color: white
+}
+
+.as {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    color: white;
+}
+
+ul {
+    list-style-type: none;
+}
+
+/*upbar code starts here*/
+
+.upbar {
+    width: 100%;
+    background: var(--li-side);
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    color: white;
+}
+
+
+.upbar_con {
+    display: flex;
+    align-items: center;
+    padding-left: 170px;
+}
+
+.upbar_con.active {
+    padding-left: 10px;
+    width: 10px;
+    background: var(--da-side);
+}
+
+.upbar_con .upbar_grid .as {
+    width: 25px;
+    height: 25px;
+}
+
+.upbar_con .upbar_profile {
+    display: flex;
+    align-items: center;
+    margin-left: 1rem;
+}
+
+.upbar_con .upbar_profile h1 {
+    font-size: 20px;
+    margin-top: -.2rem;
+    margin-left: .3rem;
+}
+
+
+.upbar_icons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100px;
+}
+
+.as-moon, .as-moon-fill {
+    display: none;
+}
+
+.as-moon-fill.active, .as-moon.active {
+    display: block;
+}
+
+
+.upbar .upbar_profile_img {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+
+/*upbar code ends here*/
+
+/*sidebar code starts frome here*/
+
+.sidebar {
+    position: fixed;
+    z-index: 100;
+    height: 100%;
+    width: 150px;
+    background-color: #1E293B;
+    padding: .5rem;
+    top: -1px;
+    overflow-y: auto;
+    color: white;
+}
+
+.sidebar .fill {
+    display: none;
+    background: #111827;
+}
+
+
+
+.sidebar.active {
+    display: none;
+}
+
+.sidebar.active ~ .container {
+    margin-left: 10px
+}
+
+
+
+.sidebar a, .profile_bar a  {
+    text-decoration: none;
+    color: black
+}
+
+
+
+.sidebar_icons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    border: 1px solid white;
+    border-radius: .5rem;
+    height: 40px;
+    margin-top: .5rem;
+    margin-bottom: .5rem;
+    padding-left: .8rem;
+    cursor: pointer;
+}
+
+.sidebar_icons:hover {
+    background-color: #030d22;
+    border: 1px solid white;
+}
+
+.sidebar_icons_name {
+    margin-top: .1rem;
+    margin-left: .4rem;
+    color: white;
+}
+
+.sidebar .logout_ul {
+    position: fixed;
+    bottom: 20px;
+    width: 150px;
+    
+}
+
+.sidebar .logout_ul .sidebar_icons {
+    border: 1px solid red;
+    color: black;
+    background-color: red;
+}
+
+
+.sidebar_icons .as-caret-down, .sidebar_icons .as-caret-up {
+    margin-left: .9rem;
+}
+
+.li_sidebar_icons .as-caret-up, .li_sidebar_icons.active .as-caret-down, .li_ul_li {
+    display: none;
+}
+
+.li_sidebar_icons.active .as-caret-up, .li_sidebar_icons.active ~ .li_ul_li {
+    display: block;
+}
+
+
+/*sidebar code ends here*/
+
+
+/* notification icon*/
+
+.notification_red {
+    background-color: red;
+    border-radius: 50%;
+    color: white;
+    padding: .2rem;
+    position: fixed;
+    top: -.0rem;
+    margin-left: .5rem;
+    width: 10px;
+    height: 10px;
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.notification_con {
+    position: absolute;
+    top: 40px;
+    right: 30px;
+    border: 1px solid #111827;
+    border-radius: .5rem;
+    max-height: 300px;
+    overflow-y: auto;
+    display: none;
+    
+}
+
+.notification_con.active {
+    display: block;
+}
+
+.notification_icons {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    
+}
+.notification_icons a {
+    color: blue;
+    text-decoration: none;
+}
+
+.notification {
+    border: 1px solid black;
+    border-radius: .5rem;
+    background: whitesmoke;
+    padding: .3rem;
+    margin: .5rem;
+}
+
+body.active .notification {
+    background: #111827;
+}
+
+body .profile_bar .as {
+    color: black
+}
+
+body.active .profile_bar .as {
+    color: white
+}
+
+/*profile bar*/
+.profile_bar.active {
+    display: block;
+}
+
+body.active .profile_bar {
+    background-color: #111827;
+}
+
+body.active .profile_bar_name {
+    color: white;
+}
+
+.profile_bar {
+    position: fixed;
+    z-index: 100;
+    background-color: white;
+    padding: .3rem;
+    border-radius: .5rem;
+    right: 1rem;
+    top: 40px;
+    display: none;
+}
+
+.profile_bar li {
+    margin: .3rem;
+}
+
+.profile_bar_icons {
+    display: flex;
+    align-items: center;
+}
+
+.profile_bar_name {
+    margin-left: .4rem;
+
+}
+/*profile bar ends*/
+
+/*other code starts*/
+.container {
+    margin-left: 180px;
+    margin-top: 50px;
+}
+
+@media only screen and (min-width: 0px) and (max-width: 600px) {
+    .sidebar {
+        display: none;
+    }
+
+    .container {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .upbar_con {
+        padding-left: 0;
+    }
+
+    .sidebar.active {
+        display: block
+    }
+
+}

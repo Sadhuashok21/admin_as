@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Profile | Ascentra solutions</title>
+    <link rel="stylesheet" href="{% static 'css/log_activity.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+    <link rel="icon" href="{% static 'images/as_logo.webp' %}">
+</head>
+<body>
+    {% include 'sidebar.html' %}
+    <div class="container">
+        <div class="content">
+            <h1>Your log activity</h1>
+            <p>Welcome back <span class="profile_name"><b>AS</b></span></p>
+            <div class="log_activity">
+                <div class="log_head">
+                    
+                </div>
+             
+
+                <table>
+                        <th>Name</th>
+                        <th>Page</th>
+                        <th>Change</th>
+                        <th>User</th>
+                        <th>Date/Time</th>
+
+                    {% for activity in activities %}
+                    <tr>
+                        <td>{{ activity.id}}</td>
+                        <td>{{ activity.activity_id}}</td>
+                        <td>{{ activity.change}}</td>
+                        <td>{{ activity.user}}</td>
+                        <td>{{ activity.time}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </div>
+           
+        </div>
+    </div>
+
+    
+    <script src="../assets/js/sidebar.js"></script>
+</body>
+</html>

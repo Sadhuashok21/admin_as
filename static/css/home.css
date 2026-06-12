@@ -1,0 +1,80 @@
+.total_box {
+    display: flex;
+    
+}
+
+.total {
+    background-color: #F9FAFB;
+    margin: 1rem;
+    padding: .5rem;
+    border-radius: .5rem;
+    border: 1px solid black;
+    height: 50px;
+    display: grid;
+    align-items: center;
+    background-color: orange;
+}
+
+body.active .total {
+    background-color: #111827;
+}
+
+.blueprints {
+    height: 500px;
+    border: 1px solid wheat;
+    margin: .5rem;
+    border-radius: .5rem;
+    padding: .5rem;
+}
+
+.users {
+    padding: .5rem;
+    width: 100%;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid black;
+}
+
+.user_table {
+    border-collapse: collapse;
+}
+
+.user_table tr td {
+    padding: .3rem;
+    text-align: center;
+    padding: 1rem;
+}
+
+.user_table tr:nth-child(odd) {
+    background-color: #111827;
+}
+
+.name_det {
+    width: 100px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.dis_app {
+    width: 200px;
+    height: 50px;
+    border-radius: .5rem;
+    background-color: red;
+    padding: .4rem;
+}
+
+.dis_app.d {
+    background-color: green;
+}
+
+/*
+.blueprint_graph {
+    width: calc(100vw - 200px);
+    height: 500px;
+    border: 1px solid black;
+}
