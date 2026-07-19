@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %} ASHOK SFS {% endblock%}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'css/sfs.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/blueprints.css' %}" />
+{% endblock %}
+
+{% block sidebar %}
+    {% include 'sidebar.html' %}
+{% endblock %}
+
+
+{% block content %}
+
+    <div class="">
+        <table>
+
+            <tr>
+                <th>User</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Uploads</th>
+                <th>Downloads</th>
+                <th>Time</th>
+                <th>Actions</th>
+            </tr>
+            {% for user in users %}
+            <tr>
+                <td>
+                    <div class="bp_image">
+                        <img src="{{ user.profile }}" class="blueprint_img" alt="logo">
+                        <div class="bp_con">
+                            <h3>{{ user.name }}</h3>
+                            <p>{{ user.email }}</p>
+                        </div>
+                    </div>
+                </td>
+
+                <td>
+                    <div class="">{{ user.type }}</div>
+                </td>
+                
+                <td>
+                    <div class="">{{ user.status }}</div>
+                </td>
+                <td>
+                    <div class="">9</div>
+                </td>
+                <td>
+                    <div class="">48,899</div>
+                </td>
+                <td>
+                    <div class="">{{ user.time }}</div>
+                </td>
+                <td>
+                    <div class="">
+                        
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+
+{% endblock %}

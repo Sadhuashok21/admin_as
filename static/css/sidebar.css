@@ -5,6 +5,9 @@
     font-family: 'Times New Roman', Times, serif;
 }
 
+::-webkit-scrollbar {
+    width: 5px
+}
 
 :root {
     --success: #16A34A;
@@ -58,7 +61,7 @@ ul {
 .upbar_con {
     display: flex;
     align-items: center;
-    padding-left: 170px;
+    padding-left: 220px;
 }
 
 .upbar_con.active {
@@ -116,7 +119,7 @@ ul {
     position: fixed;
     z-index: 100;
     height: 100%;
-    width: 150px;
+    width: 200px;
     background-color: #1E293B;
     padding: .5rem;
     top: -1px;
@@ -127,6 +130,7 @@ ul {
 .sidebar .fill {
     display: none;
     background: #111827;
+    border-radius: .5rem;
 }
 
 
@@ -147,15 +151,14 @@ ul {
 }
 
 
-
 .sidebar_icons {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    box-sizing: border-box;
-    border: 1px solid white;
+    box-sizing: border-box;/* 
+    border: 1px solid white; */
     border-radius: .5rem;
-    height: 40px;
+    height: 35px;
     margin-top: .5rem;
     margin-bottom: .5rem;
     padding-left: .8rem;
@@ -180,6 +183,16 @@ ul {
     
 }
 
+
+.sidebar .sfs-list {
+    display: none;
+    margin-left: .5rem;
+}
+
+.sidebar .sfs-list.active {
+    display: block;
+}
+
 .sidebar .logout_ul .sidebar_icons {
     border: 1px solid red;
     color: black;
@@ -187,8 +200,17 @@ ul {
 }
 
 
+.sidebar .sidebar_icons .as-caret-down, .sidebar .sidebar_icons .as-caret-up {
+    display: block;
+}
+
+
+.sidebar .sidebar_icons .as-caret-down.active, .sidebar .sidebar_icons .as-caret-up.active {
+    display:  none;
+}
+
 .sidebar_icons .as-caret-down, .sidebar_icons .as-caret-up {
-    margin-left: .9rem;
+    margin-left: 90px;
 }
 
 .li_sidebar_icons .as-caret-up, .li_sidebar_icons.active .as-caret-down, .li_ul_li {
@@ -307,7 +329,7 @@ body.active .profile_bar_name {
 
 /*other code starts*/
 .container {
-    margin-left: 180px;
+    margin-left: 250px;
     margin-top: 50px;
 }
 

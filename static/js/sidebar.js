@@ -12,6 +12,22 @@ const moon = document.querySelector('.as-moon');
 const moon_fill = document.querySelector('.as-moon-fill');
 const body = document.body;
 const currentTheme = localStorage.getItem('theme');
+const sfs = document.querySelector('.sfs.click');
+const sfs_fill = document.querySelector('.fill.sfs');
+
+const sfs_list = document.querySelector(".sfs-list");
+
+sfs.addEventListener("click", function() {
+
+    sfs_list.classList.toggle("active");
+})
+
+sfs_fill.addEventListener("click", function() {
+
+    sfs_list.classList.toggle("active");
+})
+
+
 
 // Apply stored theme
 if (currentTheme === 'dark') {

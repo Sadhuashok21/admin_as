@@ -1,246 +1,76 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ bp.name }}</title>
-    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
-    <link rel="stylesheet" href="{% static 'css/blueprint.css' %}">
-    <link rel="icon" href="{% static 'images/as_logo.webp'%}" />
-    <style>
-        .editable_blueprint form{
-            display: flex;
-            align-items: center;
-            justify-content: space-between
-        }
-    </style>
-</head>
-<body>
+
+{% block title %}
+    ASHOK SFS Blueprints
+{% endblock %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'css/sfs.css' %}">
+{% endblock %}
+   
+{% block sidebar %}
     {% include 'sidebar.html' %}
-    <div class="container">
-        <div class="content">
+{% endblock %}
 
-            <div class="blueprint_icons_img">
 
-                <div class="blueprint_ima">
-                    <img src="{}" alt="Image" class="blueprint_image" loading="lazy">
-                    <span class="blueprint_name">{{ bp.name }}</span>
-                    
-                </div>
+{% block content %}
 
-                <div class="blueprint_icons">
-                    <svg width="16" height="16" fill="currentColor" class="as as-trash" viewBox="0 0 16 16">
-                        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-                        <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-                    </svg>
-    
-                    <svg width="16" height="16" fill="currentColor" class="as as-floppy" viewBox="0 0 16 16">
-                        <path d="M11 2H9v3h2z"/>
-                        <path d="M1.5 0h11.586a1.5 1.5 0 0 1 1.06.44l1.415 1.414A1.5 1.5 0 0 1 16 2.914V14.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 14.5v-13A1.5 1.5 0 0 1 1.5 0M1 1.5v13a.5.5 0 0 0 .5.5H2v-4.5A1.5 1.5 0 0 1 3.5 9h9a1.5 1.5 0 0 1 1.5 1.5V15h.5a.5.5 0 0 0 .5-.5V2.914a.5.5 0 0 0-.146-.353l-1.415-1.415A.5.5 0 0 0 13.086 1H13v4.5A1.5 1.5 0 0 1 11.5 7h-7A1.5 1.5 0 0 1 3 5.5V1H1.5a.5.5 0 0 0-.5.5m3 4a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5V1H4zM3 15h10v-4.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5z"/>
-                    </svg>
-    
-                    <svg width="16" height="16" fill="currentColor" class="as as-share" viewBox="0 0 16 16">
-                        <path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.5 2.5 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5m-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3m11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3"/>
-                    </svg>
-                </div>
-            </div>
-            
-
-            <div class="editable">
-
-               
-                
-                <h2>Blueprint Details</h2>
-                <div class="editable_blueprint">
-                    <form action="" method="POST" enctype="multipart/form-data">
-                        <table>
-                            <tr>
-                                <td><label for="name">Name</label></td>
-                                <td><input id="name" type="text" name="name" value="{{ bp.name}}"></td>
-                            </tr>
-                            <tr>
-                                <td><label for="fake_views">Fake Views</label></td>
-                                <td><input id="fake_views" type="number" name="fake_views" value="{{ bp.fviews }}"></td>
-                            </tr>
-                            <tr>
-                                <td><label for="fake_downloads">Fake Downloads</label></td>
-                                <td><input id="fake_downloads" type="number" name="fake_downloads" value="{{ bp.fdownloads }}"></td>
-                            </tr>
-                            <tr>
-                                <td><label for="fake_likes">Fake Likes</label></td>
-                                <td><input id="fake_likes" type="number" name="fake_likes" value="{{ bp.flikes }}"></td>
-                            </tr>
-                            <tr>
-                                <td><label for="bp_sharing">BP sharing link</label></td>
-                                <td><input id="bp_sharing" type="text" name="bp_sharing" value="{{ bp.sfs_link }}"></td>
-                            </tr>
-                        
-                            
-                        </table>
-                        <table>
-                            <tr>
-                                <td><label for="status">Status</label></td>
-                                <td><select id="status">
-                                    <option hidden>Select</option>
-                                    <option value="approved" {{ bp. }}>Approved</option>
-                                    <option value="disapproved" {{ bp. }}>Disapproved</option>
-                                </select></td>
-                            </tr>
-                        
-                            <tr>
-                                <td><label for="real_views">Real Views</label></td>
-                                <td><input id="real_views" type="number" name="real_views" value="{{ bp.views }}" readonly></td>
-                            </tr>
-                            <tr>
-                                <td><label for="real_dowloads">Real Downloads</label></td>
-                                <td><input id="real_dowloads" type="number" name="real_downloads" value="{{ bp.downloads }}" readonly></td>
-                            </tr>
-                            <tr>
-                                <td><label for="real_likes">Real Likes</label></td>
-                                <td><input id="real_likes" type="number" name="real_likes" value="{{ bp.likes }}" readonly></td>
-                            </tr>
-
-                            <tr>
-                                <td align="center" colspan="2"><input type="submit"></td>
-                            </tr>
-                        </table>
-                    </form>
-                </div>
-                <br>
-
-                <div class="preview_images">
-                    <div class="preview_image">
-                            
-                        <img src="https://ashokworld.in/blueprints/{{ bp.image1 }}'pre" alt="Image1" loading="lazy" class="blueprint_image">
-                        <br><center><button class="change_image" onclick="change_image1()">Change</button></center>
-                    </div>
-                    <div class="preview_image">
-                            
-                        <img src="https://ashokworld.in/blueprints/{{ bp.image2 }}'pre" alt="Image2" loading="lazy" class="blueprint_image">
-                        <br><center><button class="change_image" onclick="change_image1()">Change</button></center>
-                    </div>
-                    <div class="preview_image">
-                            
-                        <img src="https://ashokworld.in/blueprints/{{ bp.image3 }}'pre" alt="Image3" loading="lazy" class="blueprint_image">
-                        <br><center><button class="change_image" onclick="change_image1()">Change</button></center>
-                    </div>
-                 </div>
-        
-                <h2>Change Thumbnail</h2>
-                <br>
-                <div class="thumbnail">
-                    <img src="https://ashokworld.in/blueprints/{{ bp. }}'" alt="Thumbanil" loading="lazy" class="blueprint_image">
-
-                    <button class="change_image" onclick="change_image1()">Change Image</button>
-                </div>
-            </div>
-
-            <style>
-                .change_interface {
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    width: 100vw;
-                    height: 100vh;
-                    background: 200px;
-                    display: none;
-                    align-items: center;
-                    justify-content: center;
-                }
-
-                .interface_con {
-                    background: whitesmoke;
-                    width: 300px;
-                    max-width: 1000px;
-                    height: 200px;
-                    display: grid;
-                    align-items: center;
-                    justify-content: center;
-                    border-radius: 1rem;
-                }
-
-                .interface_con form {
-                    display: grid;
-                    justify-items: center;
-                }
-
-                .upload_image {
-                    border: 1px solid black;
-                    width: 250px;
-                    height: 100px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    font-size: 20px;
-                    border-radius: .5rem
-                }
-
-                .interface_con input[type=submit] {
-                    width: 100px;
-                    border-radius: .5rem;
-                }
-
-                .x_into {
-                    position: relative;
-                    top: -85px;
-                    left: 295px;
-
-                }
-
-                .change_interface.active {
-                    display: flex;
-                }
-            </style>
-            <div class="change_interface">
-                <div class="x_into">
-                    <svg width="16" height="16" fill="currentColor" class="as as-x-lg" viewBox="0 0 16 16">
-                        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
-                    </svg>
-                </div>
-                <div class="interface_con">
-                <form action="" method="POST" enctype="multipart/form-data">
-                    <h2>Browse files</h2>
-                    <label class="upload_image" for="upload_image">+</label>
-                    <input type="file" style="display: none" name="upload_image" accept="image/*" id="upload_image">
-                    <p>*Browse files to change the selected image </p>
-                    <input type="submit" value="Upload">
-                </form>
-
-                </div>
-            </div>
-            
-            <br>
-
-            <div class="delete">
-                <svg width="16" height="16" fill="currentColor" class="as as-trash" viewBox="0 0 16 16">
-                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
-                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
-                </svg>
-                Delete blueprint
-            </div>
-        </div>
+    <div class="">
+        <h2>Blueprints</h2>
+        <p>View All </p>
     </div>
 
-    <script>
-        const change_interface = document.querySelector('.change_interface');
-        const x_change_interface = document.querySelector('.x_into');
-        const change_image = document.querySelectorAll('.change_image');
-        
-        x_change_interface.addEventListener('click', function() {
-            change_interface.classList.remove('active')
 
-        })
+    <div class="blueprints">
+        <table>
 
-        function  change_image1() {
+            {% for bp in bps %}
+
+                <tr>
+                    <td>
+                        <div class="bp_image">
+                            <img src="https://cdn.ascentracoresolutions.com/sfs/images/{{ bp.image }}" alt="bp" class="blueprint_img" />
+                            <div class="bp_con">
+                                <h3>{{ bp.name }}</h3>
+                                <p>{{ bp.user.name }}</p>
+                            </div>
+                        </div>
+                    </td>
                 
-            change_interface.classList.add('active')
+                    <td>{{ bp.category }}</td>
+                
+                    <td>{{bp.downloads }}</td>
+                
+                    <td>{{ bp.likes }}</td>
+               
+                    <td>{{ bp.status }}</td>
+                
+                    <td>
+                        <div class="actions">
+                            <a href="{% url 'sfs:edit_bp' %}?bp_id={{ bp.bp_id }}">
+                                <svg width="16" height="16" fill="currentColor" class="as as-pencil" viewBox="0 0 16 16">
+                                    <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
+                                </svg>
+                            </a>
+                            <a href="{% url 'sfs:upload_bp' %}">
+                            
+                                <svg width="16" height="16" fill="currentColor" class="as as-trash" viewBox="0 0 16 16">
+                                    <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                                    <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                                </svg>
+                            </a>
+                            <a href="https://www.ascentracoresolutions.com/sfs/blueprints/blueprint?bp_id={{bp.bp_id}}">
+                                <svg width="16" height="16" fill="currentColor" class="as as-chevron-right" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+                                </svg>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
 
-        }
+            {% endfor %}
+        </table>
+    </div>
 
-        
-
-    </script>
-</body>
-</html>
+{% endblock %}

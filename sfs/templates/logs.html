@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    ASHOK SFS Logs
+{% endblock %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'css/sfs.css' %}" />
+{% endblock %}
+
+{% block sidebar %}
+    {% include 'sidebar.html' %}
+{% endblock %}
+
+{% block content %}
+
+    <div class="">
+
+    </div>
+
+    <div class="search-fields">
+        <input type="" name="" />
+        
+    </div>
+
+    <div class="">
+        <table>
+
+            <tr>
+                <th>Error msg</th>
+                <th>User ID</th>
+                <th>IP</th>
+                <th>Version</th>
+                <th>Time</th>
+                <th>Status</th>
+            </tr>
+            {% for log in logs %}
+            <tr>
+                <td>
+                    <div class="">{{ log.error_msg }}</div>
+                </td>
+                
+                <td>
+                    <div class="">{{ log.user_id }}</div>
+                </td>
+                <td>
+                    <div class="">{{ log.ip }}</div>
+                </td>
+                <td>
+                    <div class="">{{ log.version }}</div>
+                </td>
+                <td>
+                    <div class="">{{ log.time }}</div>
+                </td>
+                <td>
+                    <div class="">
+                        {{ log.status }}
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

@@ -13,10 +13,13 @@ a {
 
 table {
     border-collapse: collapse;
-
+    text-align: center;
 }
 
-
+.bp_image {
+    display: flex;
+    align-items: center;
+}
 .head {
     display: flex;
     align-items: center;
@@ -35,12 +38,12 @@ input[type=submit] {
 }
 
 
-.blueprints tr:nth-child(odd) {
+/* .blueprints tr:nth-child(odd) {
     background: #111827;
 }
-
+ */
 table tr td {
-    padding: .5rem;
+    padding: 1rem;
 }
 
 .blueprint {
@@ -58,10 +61,19 @@ table tr td {
 }
 
 .blueprint_img {
-    width: 80px;
+    width: 60px;
     height: 40px;
     border-radius: .5rem;
     margin: .2rem
+}
+
+.bp_con {
+    margin-left: .5rem;
+}
+
+.bp_con p {
+    font-size: 10px;
+    opacity: 70%;
 }
 
 .next {

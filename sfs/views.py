@@ -8,14 +8,13 @@ from django.urls import reverse
 from shared_lib.utils.models import *
 
 # Create your views here.
-
 class Home(View):
     def get(self, request):
-        blue_cat = BpCat.objects.all()
-
+        blue_cat = BpCat.objects.order_by('-id')[:5]
+        print(request.resolver_match.url_name)
         views = BpDlv.objects.filter(type="view").count()
         
-        blueprints = BP.objects.filter(status="approved").order_by('-id')[:10]
+        blueprints = BP.objects.filter(status="approved").order_by('-id')[:5]
         return render(request, "sfs.html", {
             "blue_cats": blue_cat, 
             "blueprints": blueprints,
@@ -30,11 +29,12 @@ class Home(View):
 
 
 
-def blueprints(request):
-    bp_id = request.GET.get('blueprint_id', '')
+def blueprint(request, bp_id):
 
+    bp_id = request.GET.get('blueprint_id', '')
+    
     if bp_id:
-        bp = BP.objects.filter(blueprint_id=bp_id).first()
+        bp = BP.objects.filter(bp_id=bp_id).first()
         if bp:
 
             return render(request, "blueprints.html", {"bp": bp})
@@ -44,6 +44,25 @@ def blueprints(request):
     else:
 
         return HttpResponse("bp id is missing")
+
+
+def logs(request):
+    logs = AllErrors.objects.order_by('-id')
+    return render(request, "logs.html", {"logs": logs})
+
+def users(request):
+    
+    return render(request, "sfs_users.html", {"users": AllUsers.objects.all()})
+
+
+def categories(request):
+    return render(request, "categories.html")
+
+def blueprints(request):
+
+    bp = BP.objects.all()[:5]
+    return render(request, "blueprints.html", {"bps": bp})
+
 
 def sfs_home(request):
     pass
@@ -93,7 +112,7 @@ class EditBp(View):
         bp_id = request.GET.get('bp_id', '')
 
         if bp_id:
-            bp = BP.objects.filter(blueprint_id=bp_id).first()
+            bp = BP.objects.filter(bp_id=bp_id).first()
             if bp:
                 return render(request, "edit_bp.html", {"bp": bp})
             else:
@@ -102,6 +121,9 @@ class EditBp(View):
         else: 
             return redirect("sfs:AccessRestriced")
     
+
+    def put(request):
+        return HttpResponse("put method called")
     
     def post(request):
         bp_id = request.POST.get('bp_id', '')

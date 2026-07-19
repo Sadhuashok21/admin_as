@@ -2,7 +2,7 @@
 {% load static %}
 
 
-{% block title %} Spaceflight Simulator(SFS) | Ascentracore Solutions{% endblock%}
+{% block title %} ASHOK SFS {% endblock%}
 
 {% block stylesheet %}
     <link rel="stylesheet" href="{% static 'css/sfs.css' %}" />
@@ -11,6 +11,8 @@
 {% block sidebar %}
     {% include 'sidebar.html' %}
 {% endblock %}
+
+
 {% block content %}
     <h1>Spaceflight Simulator(SFS)</h1>
     <div class="top_boxes">
@@ -76,9 +78,9 @@
             <th>Status</th>
             {% for blue_cat in blue_cats %}
             <tr>
-                <td>{{blue_cat.name}}</td>
-                <td><img src="https://www.ashokworld.in/assets/images/{{ blue_cat.blueprint_img }}" class="200" width="100"></td>
-                <td><span class="td">{{ blue_cat.blueprint_para }}</span></td>
+                <td>{{blue_cat.bp_name }}</td>
+                <td><img src="https://cdn.ascentracoresolutions.com/sfs/images/{{ blue_cat.bp_img }}" class="200" width="100"></td>
+                <td><span class="td">{{ blue_cat.bp_para }}</span></td>
                 <td>{% if blue_cat.status == 'approved' %}
                         <span class="approved">{{ blue_cat.status }}</span>
                     {% else %}
@@ -115,14 +117,14 @@
                 <td>
                     <div class="blueprint">
 
-                        <img src="https://www.ashokworld.in/blueprints/{{ blueprint.image}}" class="blueprint_img" alt="Logo" loading="lazy">
+                        <img src="https://cdn.ascentracoresolutions.com/sfs/images/{{ blueprint.image}}" class="blueprint_img" alt="Logo" loading="lazy">
                         <span class="blueprint_name">{{ blueprint.name }}</span>
                     </div>
                 </td>
                 <td align="center">{{ blueprint.views }}</td>
                 <td align="center">{{blueprint.downloads}}</td>
                 <td align="center">
-                    <a href="{% url 'sfs:blueprints' %}?blueprint_id={{blueprint.blueprint_id}}">
+                    <a href="{% url 'sfs:blueprints' %}?blueprint_id={{blueprint.bp_id}}">
                         <svg width="16" height="16" fill="blue" class="as as-pencil" viewBox="0 0 16 16">
                             <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
                         </svg>

@@ -27,5 +27,5 @@ urlpatterns = [
     path('sonicora/', include(("sonicora.urls", "sonicora"), namespace="sonicora")),
     path('transport_hub/', include(('transport_hub.urls', "transport_hub"), namespace="transport_hub")),
     path('profile/', include(('user_profile.urls', 'profile'), namespace="profile")),
-
+    path('/', views.home, name="home"),
 ] 

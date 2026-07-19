@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %} Upload Category (SFS) | Ascentracore Solutions{% endblock%}
+{% block title %} Upload Category (SFS) {% endblock%}
 
 {% block stylesheet %}
     <link rel="stylesheet" href="{% static 'css/sfs.css' %}" />
@@ -13,7 +13,15 @@
 {% block content %}
     <h1>Upload Category</h1>
     <form action="" method="POST">
-        <input type="" />
+        <label for="name">Name <span class="star">*</span></label>
+        <input type="" name="para" id="para" placeholder="" />
+
+        <br>
+        <label for="para">Name <span class="star">*</span></label>
+
+        <textarea id="para" name="para">
+        </textarea>
+        <br>
         <input type="submit" value="Upload Category" />
     </form>
 {% endblock %}
