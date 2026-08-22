@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %}
+    Videos
+{% endblock %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'css/st.css' %}" />
+    
+{% endblock %}
+
+{% block sidebar %}
+    {% include "st_sidebar.html" %}
+{% endblock %}
+
+{% block content %}
+    <div class="form" id="form">
+        <form onsubmit="uploadImage(event, 'http://127.0.0.1:8000/skiltrix/videos/')" enctype="multipart/form-data">
+
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td><label for="title">Title</label></td>
+                    <td><input type="text" name="title" id="title" required /></td>
+                </tr>
+                <tr>
+                    <td><label for="description">Description</label></td>
+                    <td><input type="text" name="description" id="description" required /></td>
+                </tr>
+
+                <tr>
+                    <td><label for="course">Courses</label></td>
+                    <td>
+                        <select name="course" id="course">
+                            <option hidden>Select</option>
+                            {% for course in courses %}
+                                <option value="{{ course.course_id}}">{{ course.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label for="video">video</label></td>
+                    <td><input type="file" name="video" accept="video/*" id="video" required /></td>
+                </tr>
+                <tr>
+                    <td><label for="image">Image</label></td>
+                    <td><input type="file" name="image" accept="image/*" id="image" required /></td>
+                </tr>
+                
+                
+            </table>
+
+            <div class="btns_form">
+                
+                <button type="button" class="cancel_btn" onclick="x_into()">
+                    Cancel
+                </button>
+                <button class="add_btn">
+                    <svg width="16" height="16" fill="currentColor" class="as as-plus" viewBox="0 0 16 16">
+                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+                    </svg>
+                    Add Internship
+                </button>
+            </div>
+        </form>
+    </div>
+
+
+    <div id="con">
+
+        
+        <div class="heading_top">
+            <h1>Videos</h1>
+            <button type="button" class="add_btn_top" onclick="x_into()">Add Video</button>
+        </div>
+
+        <br>
+        <br>
+        
+    
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>video ID</th>
+                <th>Description</th>
+                <th>Internships</th>            
+                <th>Status</th>
+                <th>Created at</th>
+                <th>Actions</th>
+            </tr>
+            {% for video in videos %}
+            <tr>
+                <td>
+                    <div class="img_con">
+                        <img src="https://cdn.ascentracoresolutions.com/st/images/{{ video.image}}" class="img" alt="{{ video.title }}">
+                        {{ video.title }}
+                    </div>
+                </td>
+                <td>{{ video.video_id }}</td>
+                <td>{{ video.description }}</td>
+                <td>{{ video.name }}</td>
+                <td class="time">{{ video.created_at }}</td>
+                <td><span class="intern {{ video.status }}">{{ video.status }}</span></td>
+                <td>
+                    <div class="btns">
+                        <button onclick="" type="button">
+                            <svg width="16" height="16" fill="currentColor" class="as as-eye" viewBox="0 0 16 16">
+                                <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
+                                <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
+                            </svg>
+                        </button>
+                        <button onclick="" type="button">
+                            <svg width="16" height="16" fill="currentColor" class="as as-pencil" viewBox="0 0 16 16">
+                                <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
+                            </svg>
+                        </button>
+                        <button type="button" onclick="deleteUrl('http://127.0.0.1:8000/skiltrix/videos/', '{{ video.video_id }}', 'video_id')">
+                            <svg width="16" height="16" fill="currentColor" class="as as-trash" viewBox="0 0 16 16" >
+                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                                <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+
+    <script src="{% static 'js/fetch.js' %}">
+    </script>
+{% endblock %}
+

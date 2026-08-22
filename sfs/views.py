@@ -47,7 +47,7 @@ def blueprint(request, bp_id):
 
 
 def logs(request):
-    logs = AllErrors.objects.order_by('-id')
+    logs = AllErrors.objects.order_by('-id')[:10]
     return render(request, "logs.html", {"logs": logs})
 
 def users(request):
@@ -59,8 +59,11 @@ def categories(request):
     return render(request, "categories.html")
 
 def blueprints(request):
-
-    bp = BP.objects.all()[:5]
+    off = request.GET.get('off', '')
+    if off:
+        bp = BP.objects.filter(type="blueprint")[int(off)*10:(int(off)*10 + 10)]
+    else:
+        bp = BP.objects.filter(type="blueprint")[:10]
     return render(request, "blueprints.html", {"bps": bp})
 
 

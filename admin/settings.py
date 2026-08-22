@@ -11,7 +11,11 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
-import sys
+import sys, os
+from dotenv import load_dotenv
+
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,19 +24,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-4else0!nmwp$$^z3(g#0u^xl1(5z01q0s)!fn_2*@^^c%qaf6b'
+SECRET_KEY = 'django-insecure-d_jisgreughuc&#-$ngu%2a-h4-yi)b+ymh%0npudpqmlr-$+!7f43vuii'
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+SESSION_COOKIE_DOMAIN = None
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 PROJECT_ROOT = BASE_DIR.parent
 
 sys.path.insert(0, str(PROJECT_ROOT))
-
-
-
 
 # Application definition
 
@@ -52,8 +56,14 @@ INSTALLED_APPS = [
     'user_profile',
     'shared_lib.sfs_core',
     'shared_lib',
-    
+    'shared_lib.skiltrix_core',
+    'logs',
+    'shared_lib.utils'
 ]
+
+AUTH_USER_MODEL = "sfs_core.AllUsers"
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -91,11 +101,11 @@ WSGI_APPLICATION = 'admin.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'as_main',
-        'HOST': 'localhost',
-        'PASSWORD': 'Ashokkumar21',
-        'USER': 'root',
-        'PORT': '3306',
+        'NAME': os.getenv("DB_NAME"),
+        'HOST': os.getenv("DB_HOST"),
+        'PASSWORD': os.getenv("DB_PASSWORD"),
+        'USER': os.getenv("DB_USER"),
+        'PORT': os.getenv("DB_PORT"),
     },
     'humbell': {
         'ENGINE': 'django.db.backends.mysql',
@@ -129,13 +139,20 @@ DATABASES = {
         'USER': 'root',
         'PORT': '3306',
     },
+    'skiltrix': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'skiltrix',
+        'HOST': 'localhost',
+        'PASSWORD': 'Ashokkumar21',
+        'USER': 'root',
+        'PORT': '3306',
+    },
     
 }
 
 DATABASE_ROUTERS = [
     'shared_lib.db_router.AppDatabaseRouter'
 ]
-
 
 
 # Password validation
@@ -176,8 +193,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR/"static"
 ]
-
-APPEND_SLASH = False
 
 
 # Default primary key field type

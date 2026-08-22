@@ -3,13 +3,6 @@ a {
     color: black
 }
 
-.sidebar .fill.sfs {
-    display: block;
-}
-
-.sidebar .sfs {
-    display: none;
-}
 
 table {
     border-collapse: collapse;

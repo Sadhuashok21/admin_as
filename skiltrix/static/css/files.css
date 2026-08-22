@@ -1,0 +1,79 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+.editor .as {
+    width: 20px;
+    margin-left: .2rem;
+    height: 20px;
+    cursor: pointer;
+    color: black;
+}
+
+.vertical {
+    width: 1px;
+    height: 60px;
+    border: none;
+    background: #00000076;
+
+}
+
+.editor {
+    display: flex;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.671);
+    width: 97%;
+    margin: .5rem;
+    padding: .1rem;
+    border-radius: .5rem;
+    height: 60px;
+    justify-content: space-evenly;
+}
+
+.font-color input {
+    width: 100%;
+}
+
+
+
+.border-insert, .align-list {
+    display: grid;
+    justify-items: center;
+}
+
+.borders {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.537) ;
+}
+.align {
+    border-top: 1px solid rgba(0, 0, 0, 0.537);
+}
+
+.con-editable{
+    margin: 10px;
+    margin-left: auto;
+    padding: .5rem;
+    border: 1px solid black;
+}
+
+.editor button {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.style-script {
+    padding-top: .2rem;
+    padding-bottom: .2rem;
+    margin: 5px;
+}
+ 
+/* 
+.align, .font-style, .borders {
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid rgba(0, 0, 0, 0.459);
+    justify-content: space-evenly;
+    padding: .5rem;
+    margin: 5px;
+    border-radius: .3rem;
+} */

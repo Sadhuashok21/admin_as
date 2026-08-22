@@ -1,0 +1,20 @@
+{% extends "base.html"%}
+{% load static %}
+
+{% block title %}
+{% endblock %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}" />
+{% endblock %}
+
+{% block sidebar %}
+    {% include 'sidebar.html' %}
+
+{% endblock %}
+
+
+{% block content %}
+    <form action="" method="POST">
+    </form>
+{% endblock %}

@@ -1,0 +1,129 @@
+button[type="button"] {
+    background: transparent;
+    border: none;
+}
+
+
+.as-eye {
+    color: rgb(39, 39, 139)
+}
+
+.as-trash {
+    color: red;
+}
+
+.as-pencil {
+    color: blue
+}
+
+
+table tr td {
+    padding: 1rem;
+}
+
+.time {
+    width: 80px;
+    text-align: center;
+}
+
+.img_con {
+    justify-items: center;
+    text-align: center;
+    justify-content: center;
+    display: grid;
+}
+
+.img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+.heading_top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-right: .5rem;
+}
+
+.heading_top .add_btn_top {
+    border: 1px solid black;
+    color: white;
+    padding: .5rem;
+    border-radius: .5rem;
+    background: blue;
+    cursor: pointer;
+}
+
+.intern.active {
+    background: var(--success);
+    color: white;
+    padding: .3rem;
+    border-radius: .5rem;
+}
+
+
+.btns {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form.active {
+    display: block;
+}
+
+.form {
+    background-color: white;
+    display: none;
+    justify-items: center;
+    border-radius: .5rem;
+    position: fixed;
+    top: 40px;
+    width: 80%;
+    height: 80%;
+    align-content: center;
+}
+
+.description {
+    width: 100px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+.btns_form {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    display: flex;
+    align-items: center;
+}
+
+
+.btns_form .cancel_btn {
+    color: black;
+}
+
+.btns_form button {
+    padding: .5rem;
+    border-radius: .5rem;
+    border: 1px solid black;
+    margin: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+.add_btn {
+    display: flex;
+    align-items: center;
+    background: blue;
+}
+
+.form input {
+    padding: .5rem;
+    border-radius: .5rem;
+}
+
+

@@ -1,6 +1,7 @@
 from django.urls import path, include
-from . import views
+from .views import *
 
 urlpatterns = [
-    path("", views.index, name="krishi_index")
+    path("", index, name="krishi_index"),
+    path("access_restricted", access_restricted, name="access_restricted")
 ]

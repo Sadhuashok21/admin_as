@@ -1,8 +1,6 @@
 const grid = document.querySelector('.upbar_grid');
 const upbar_co = document.querySelector('.upbar_con');
 const sidebar = document.querySelector('.sidebar');
-const li_sidebar_icons = document.querySelector('.li_sidebar_icons');
-const li_ul_li = document.querySelector('.li_ul_li');
 const upbar_profile_img  = document.querySelector('.upbar_icons .upbar_profile_img');
 const profile_bar = document.querySelector('.profile_bar');
 const notification = document.querySelector('.notification_con');
@@ -12,20 +10,7 @@ const moon = document.querySelector('.as-moon');
 const moon_fill = document.querySelector('.as-moon-fill');
 const body = document.body;
 const currentTheme = localStorage.getItem('theme');
-const sfs = document.querySelector('.sfs.click');
-const sfs_fill = document.querySelector('.fill.sfs');
 
-const sfs_list = document.querySelector(".sfs-list");
-
-sfs.addEventListener("click", function() {
-
-    sfs_list.classList.toggle("active");
-})
-
-sfs_fill.addEventListener("click", function() {
-
-    sfs_list.classList.toggle("active");
-})
 
 
 
@@ -76,10 +61,6 @@ grid.addEventListener('click', function() {
     console.log('clicked')
 })
 
-li_sidebar_icons.addEventListener('click', function() {
-    li_sidebar_icons.classList.toggle('active')
-    li_ul_li.classList.toggle('.active')
-})
 
 container.addEventListener('click', function() {
     notification.classList.remove('active')
