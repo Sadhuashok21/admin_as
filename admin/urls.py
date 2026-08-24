@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,4 +31,25 @@ urlpatterns = [
     path('profile/', include(('user_profile.urls', 'profile'), namespace="profile")),
     path('', views.home, name="home"),
     path('logs/', include(("logs.urls", 'logs'), namespace="logs")),
+    path('access-restricted', views.access_restricted, name="access-restricted")
 ] 
+
+urlpatterns += static(
+    settings.STATIC_URL,
+    document_root=settings.STATIC_ROOT
+)
+
+
+
+
+handler404 = 'admin.views.er_404'
+handler400 = 'admin.views.er_400'
+handler401 = 'admin.views.er_401'
+handler403 = 'admin.views.er_403'
+handler408 = 'admin.views.er_408'
+handler500 = 'admin.views.er_500'
+handler502 = 'admin.views.er_502'
+handler503 = 'admin.views.er_503'
+handler504 = 'admin.views.er_504'
+handler505 = 'admin.views.er_505'
+

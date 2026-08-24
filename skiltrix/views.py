@@ -24,6 +24,7 @@ def index(request):
     if request.user.is_authenticated:
         return render(request, "st_index.html")
     else:
+        
         return redirect("skiltrix:restriciton")
 
 def users(request):

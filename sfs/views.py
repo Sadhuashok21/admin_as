@@ -7,13 +7,19 @@ from django.contrib import messages
 from django.urls import reverse
 from shared_lib.utils.models import *
 
+
 # Create your views here.
 class Home(View):
     def get(self, request):
+        if not request.user.is_authenticated:
+            return redirect("access-restricted")
+
+
+        print(request.user.is_authenticated)
         blue_cat = BpCat.objects.order_by('-id')[:5]
         print(request.resolver_match.url_name)
         views = BpDlv.objects.filter(type="view").count()
-        
+
         blueprints = BP.objects.filter(status="approved").order_by('-id')[:5]
         return render(request, "sfs.html", {
             "blue_cats": blue_cat, 
@@ -25,12 +31,75 @@ class Home(View):
             })
     
     def post(self, request):
-        return redirect("sfs:AccessRestriced")
+        if not request.user.is_authenticated:
 
+            return redirect("access_restricted")
+
+
+import firebase_admin
+
+from firebase_admin import auth
+from django.http import JsonResponse
+from firebase_admin import credentials
+from pathlib import Path
+from django.conf import settings
+
+
+
+def firebase_users(request):
+    if not request.user.is_authenticated:
+        return redirect("access-restricted")
+
+    if not firebase_admin._apps:
+
+        cred = credentials.Certificate(
+            Path(settings.BASE_DIR) / "sfs.json"
+        )
+
+    firebase_admin.initialize_app(cred)
+    users = []
+
+    try:
+        page = auth.list_users()
+
+        while page:
+
+            for user in page.users:
+
+                users.append({
+                    "uid": user.uid,
+                    "email": user.email,
+                    "phone_number": user.phone_number,
+                    "display_name": user.display_name,
+                    "photo_url": user.photo_url,
+                    "disabled": user.disabled,
+                    
+                })
+
+            page = page.get_next_page()
+
+        return JsonResponse({
+            "success": True,
+            "count": len(users),
+            "users": users
+        })
+
+    except Exception as e:
+
+        return JsonResponse({
+            "success": False,
+            "error": str(e)
+        }, status=500)
+
+def send(request):
+    pass
 
 
 def blueprint(request, bp_id):
 
+    if not request.user.is_authenticated:
+        return redirect("access-restricted")
+    
     bp_id = request.GET.get('blueprint_id', '')
     
     if bp_id:
@@ -47,18 +116,30 @@ def blueprint(request, bp_id):
 
 
 def logs(request):
+
+    if not request.user.is_authenticated:
+        return redirect("access-restricted")
     logs = AllErrors.objects.order_by('-id')[:10]
     return render(request, "logs.html", {"logs": logs})
 
 def users(request):
-    
+
+    if not request.user.is_authenticated:
+        return redirect("access-restricted")
+        
     return render(request, "sfs_users.html", {"users": AllUsers.objects.all()})
 
 
 def categories(request):
+
+    if not request.user.is_authenticated:
+        return redirect("access-restricted")
     return render(request, "categories.html")
 
 def blueprints(request):
+
+    if not request.user.is_authenticated:
+        return redirect("access-restricted")
     off = request.GET.get('off', '')
     if off:
         bp = BP.objects.filter(type="blueprint")[int(off)*10:(int(off)*10 + 10)]
@@ -68,11 +149,15 @@ def blueprints(request):
 
 
 def sfs_home(request):
+    if not request.user.is_authenticated:
+        return redirect("access-restricted")
     pass
 
 
 class UploadCat(View):
     def get(self, request):
+        if not request.user.is_authenticated:
+            return redirect("access-restricted")
         return render(request, "upload_category.html")
     
     def post(self, request):
@@ -81,9 +166,13 @@ class UploadCat(View):
 
 class UploadBp(View):
     def get(self, request):
+        if not request.user.is_authenticated:
+            return redirect("access-restricted")
         return render(request, "upload_bp.html")
     
     def post(self, request):
+        if not request.user.is_authenticated:
+            return redirect("access-restricted")
         name = request.POST.get('name', '')       
         type = request.POST.get('type', '')
         link = request.POST.get('link', '')
@@ -112,6 +201,8 @@ class UploadBp(View):
 class EditBp(View):
     
     def get(self, request):
+        if not request.user.is_authenticated:
+            return redirect("access-restricted")
         bp_id = request.GET.get('bp_id', '')
 
         if bp_id:
@@ -129,6 +220,8 @@ class EditBp(View):
         return HttpResponse("put method called")
     
     def post(request):
+        if not request.user.is_authenticated:
+            return redirect("access-restricted")
         bp_id = request.POST.get('bp_id', '')
         name = request.POST.get('name', '')
         image = request.POST.get('image', '')
@@ -144,12 +237,10 @@ class EditBp(View):
         return render(request, "edit_bp.html")
 
 
-class AccessRestriced(View):
-    def get(self, request):
-        return render(request, "access_restricted.html")
-
 class EditCat(View):
     def get(self, request):
+        if not request.user.is_authenticated:
+            return redirect("access-restricted")
         cat_id= request.GET.get('category_id', '')
         if cat_id:
 
@@ -158,6 +249,8 @@ class EditCat(View):
             return redirect("sfs:AccessRestriced")
     
     def post(self, request):
+        if not request.user.is_authenticated:
+            return redirect("access-restricted")
         bp_id = request.POST.get('bp_id', '')
         name = request.POST.get('name', '')
         image = request.POST.get('image', '')

@@ -74,3 +74,14 @@ def update_column(db_name, table_name, column_name, new_column_type):
             "status": False,
             "error": str(e)
         }
+
+
+
+images = "https://cdn.ascentracoresolutions.com/"
+
+def site_data(request):
+    data = {
+        "images": images,
+    }
+
+    return data

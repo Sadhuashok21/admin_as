@@ -10,9 +10,11 @@ urlpatterns = [
     path('upload_bp', views.UploadBp.as_view(), name="upload_bp"),
     path('edit_category', views.EditCat.as_view(), name="edit_cat"),
     path('edit_bp', views.EditBp.as_view(), name="edit_bp"),
-    path('access_restricted', views.AccessRestriced.as_view(), name="AccessRestriced"),
     path('logs', views.logs, name="logs"),
     path('users', views.users, name="users"),
     path('categories', views.categories, name="categories"),
+
+    path('sfs-users/', views.firebase_users, name="firebase-users"),
+
     
 ]
