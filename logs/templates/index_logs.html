@@ -1,13 +1,59 @@
 {% extends "base.html" %}
+{% load static %}
 
+{% block title %}
+    Logs
+{% endblock %}
+
+{% block stylesheet %}
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+    </style>
+{% endblock  %}
 
 {% block sidebar %} 
-    {% include "sidebar.html" %}
+    {% include "logs_sidebar.html" %}
 {% endblock %}
 
 
 
 {% block content %}
     <h1>Logs</h1>
-    
+    <form method="get" action="{% url 'logs:logs_index' %}">
+        <input type="text" name="search" placeholder="Search logs..." value="{{ request.GET.search }}">
+        <button type="submit">Search</button>
+    </form>
+    <div class="logs">
+        <table border=1>
+            <tr>
+                <th>Time</th>
+                <th>User</th>
+                <th>Error code</th>
+                <th>Error message</th>
+                <th>Activity</th>
+                <th>Platform</th>
+                <th>Platform name</th>
+            </tr>
+            {% for log in logs %}
+                <tr>
+                    <td>{{ log.time }}</td>
+                    <td>{{ log.user }}</td>
+                    <td>{{ log.error_code }}</td>
+                    <td>{{ log.error_msg }}</td>
+                    <td>{{ log.activity_id }}</td>
+                    <td>{{ log.platform }}</td>
+                    <td>{{ log.platform_name }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div class="view" id="view">
+
+    </div>
+
+    <script src="{% static 'js/logs.js' %}"></script>
+
 {% endblock %}
