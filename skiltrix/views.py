@@ -117,9 +117,26 @@ class Internships(View):
 
         name = data.get('name', '')
         company = data.get('company', '')
+        type = data.get('type', '')
+        location = data.get('location', '')
+        date = data.get('date', '')
+        apply_link = data.get('apply_link', '')
+        price = data.get('price', '')
+        paid = data.get('paid', '')
+
 
         if name and company:
-            Internship.objects.create(name = name, internship_id = unique_id(), company_id=company)
+            Internship.objects.create(
+                name = name,
+                internship_id = unique_id(),
+                company_id=company,
+                apply_link=apply_link,
+                type = type,
+                is_paid = paid,
+                deadline = date,
+                location=location,
+                price = price,
+                )
         else:
             data_json.update({"message": "error"})
 

@@ -14,7 +14,7 @@ urlpatterns = [
     path('users', views.users, name="users"),
     path('categories', views.categories, name="categories"),
 
-    path('sfs-users/', views.firebase_users, name="firebase-users"),
+    path('sfs-users/', views.firebase_users, name="users"),
 
     
 ]

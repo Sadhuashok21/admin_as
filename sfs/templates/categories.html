@@ -9,10 +9,18 @@
 {% endblock %}
 
 {% block sidebar %}
-    {% include 'sidebar.html' %}
+    {% include 'sfs_sidebar.html' %}
 {% endblock %}
 
 
 {% block content %}
-    
+    <div class="categories">
+        {% for cat in categories%}
+        <div class="category">
+
+            <h1>{{ cat.bp_name }}</h1>
+            <img src="{{ images }}sfs/images/{{ cat.bp_img }}" alt="category image" class="category_img">
+        </div>
+        {% endfor %}
+    </div>
 {% endblock %}

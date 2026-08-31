@@ -1,11 +1,19 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from .models import *
 from shared_lib.sfs_core.models import *
 from django.views import View
 from django.contrib import messages
 from django.urls import reverse
 from shared_lib.utils.models import *
+
+import firebase_admin
+
+from firebase_admin import auth, credentials
+
+from pathlib import Path
+from django.conf import settings
+
 
 
 # Create your views here.
@@ -35,14 +43,6 @@ class Home(View):
 
             return redirect("access_restricted")
 
-
-import firebase_admin
-
-from firebase_admin import auth
-from django.http import JsonResponse
-from firebase_admin import credentials
-from pathlib import Path
-from django.conf import settings
 
 
 
@@ -134,7 +134,9 @@ def categories(request):
 
     if not request.user.is_authenticated:
         return redirect("access-restricted")
-    return render(request, "categories.html")
+
+    
+    return render(request, "categories.html", {"categories": BpCat.objects.all()})
 
 def blueprints(request):
 
