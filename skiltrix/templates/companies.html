@@ -17,21 +17,44 @@
 
 {% block content %}
     <div id="form" class="form">
-        <form onsubmit="uploadImage(event, 'http://127.0.0.1:8000/skiltrix/companies/')" enctype="multipart/form-data">
+        <form onsubmit="uploadCompany(event, '{{ url }}skiltrix/companies/')" enctype="multipart/form-data">
 
+            <h1>Upload new company</h1>
             {% csrf_token %}
             <table>
                 <tr>
                     <td><label for="name">Company Name</label></td>
+                </tr>
+                <tr>
                     <td><input type="text" name="name" id="name" required /></td>
                 </tr>
                 <tr>
                     <td><label for="image">Image</label></td>
-                    <td><input type="file" accept="image/*" name="image" id="image" required /></td>
+                </tr>
+                <tr>
+                    <td><input type="file" accept="image/*" name="image" id="image" onchange="previewImage(event)" required /></td>
+                </tr>
+                <tr>
+                    <td>
+                        <center><img id="imagePreview" src="" alt="Image Preview" style="display: none; max-width: 200px; max-height: 150px; margin-top: 10px;"></center>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div id="progressContainer" style="display: none;">
+                            <progress id="progressBar" value="0" max="100"></progress>
+                            <span id="progressText">0%</span>
+                        </div>
+
+                        <p id="status"></p>
+                    
+                    </td>
                 </tr>
                 <tr>
                     <td><label for="description">Description</label></td>
-                    <td><input type="description" name="description" id="description" required /></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="description" id="description" required /></td>
                 </tr>
 
             </table>

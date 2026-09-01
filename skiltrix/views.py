@@ -7,6 +7,7 @@ from django.contrib import messages
 import json, os
 from dotenv import load_dotenv
 from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings
 
 load_dotenv()
 
@@ -14,7 +15,28 @@ load_dotenv()
 
 class FileSystem(View):
     def get(self, request):
-        return render(request, "cke-editor.html")
+        if request.user.is_authenticated:
+            items = []
+
+            for item in os.listdir("."):
+                items.append(item)
+
+
+            from pathlib import Path
+
+            file = Path(settings.BASE_DIR) / "skiltrix/views.py"
+
+            if file.is_file():
+                print(file.read_text())
+            else:
+                print("File not found")
+
+            con = file.read_text(encoding="utf-8")
+            lines = con.splitlines()
+
+            return render(request, "files.html", {"items": items, "con": con, "lines": lines})
+        else:
+            return redirect("access_restricted")
 
     def post(self, request):
         pass
@@ -66,8 +88,6 @@ class Language_(View):
         if not request.user.is_authenticated:
             return redirect('skiltrix:restriciton')
 
-
-        print("delete")
         data = json.loads(request.body)
         language_id = data.get('language_id', '')
 
@@ -200,9 +220,13 @@ class Course(View):
         image = request.FILES.get('image', '')
         is_paid = request.POST.get('paid', '')
         type = request.POST.get('type', '')
-        price = request.POST.get('price', '')
 
-        if name and image and is_paid and type and price:
+        price = 0
+
+        if is_paid == '1':
+            price = request.POST.get('price', '')
+
+        if name and image and is_paid and type:
 
             import boto3
             
@@ -228,6 +252,7 @@ class Course(View):
                 user_id = request.user.user_id,
                 type=type,
                 is_paid=is_paid,
+                price=price,
                 image = new_image)
         else:
             data_json.update({"message": "error"})
@@ -248,7 +273,25 @@ class Course(View):
         course_id = data.get("course_id", "")
 
         if course_id:
-            Courses.objects.filter(course_id=course_id).delete()
+            course = Courses.objects.filter(course_id=course_id).first()
+            if course:
+                import boto3
+                import os
+
+                s3 = boto3.client(
+                    service_name="s3",
+                    endpoint_url=os.getenv("endpoint_url"),
+                    aws_access_key_id=os.getenv("aws_access_key_id"),
+                    aws_secret_access_key=os.getenv("aws_secret_access_key"),
+                    region_name="auto",
+                )
+
+                s3.delete_object(
+                    Bucket="sfs-blueprints",
+                    Key="st/images/" + course.image
+                )
+                
+                course.delete()
         else:
             data_json.update({"message": "error"})
 
@@ -338,10 +381,34 @@ class Video(View):
             "message": "success",
         }
 
+
+
         video_id = data.get("video_id", "")
 
         if video_id:
-            Videos.objects.filter(video_id=video_id).delete()
+            video = Videos.objects.filter(video_id=video_id).first()
+            
+
+            if video:
+
+                import boto3
+                import os
+
+                s3 = boto3.client(
+                    service_name="s3",
+                    endpoint_url=os.getenv("endpoint_url"),
+                    aws_access_key_id=os.getenv("aws_access_key_id"),
+                    aws_secret_access_key=os.getenv("aws_secret_access_key"),
+                    region_name="auto",
+                )
+
+                s3.delete_object(
+                    Bucket="sfs-blueprints",
+                    Key="st/videos/" + video.video
+                )
+
+                video.delete()
+
         else:
             data_json.update({"message": "error"})
 
@@ -407,8 +474,31 @@ class Company(View):
             "status": True,
             "message": "success",
         }
+
+
         if company_id:
-            Companies.objects.filter(company_id=company_id).delete()
+            comp = Companies.objects.filter(company_id=company_id).first()
+
+            if comp:
+
+                import boto3
+                import os
+
+                s3 = boto3.client(
+                    service_name="s3",
+                    endpoint_url=os.getenv("endpoint_url"),
+                    aws_access_key_id=os.getenv("aws_access_key_id"),
+                    aws_secret_access_key=os.getenv("aws_secret_access_key"),
+                    region_name="auto",
+                )
+
+                s3.delete_object(
+                    Bucket="sfs-blueprints",
+                    Key="st/images/" + comp.image
+                    
+                )
+
+                comp.delete()
         else:
             data_json.update({"message": "error"})
 

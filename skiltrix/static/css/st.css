@@ -4,6 +4,10 @@ button[type="button"] {
 }
 
 
+::-webkit-scrollbar {
+    width: 3px;
+}
+
 .as-eye {
     color: rgb(39, 39, 139)
 }
@@ -16,10 +20,9 @@ button[type="button"] {
     color: blue
 }
 
-
-table tr td {
+/* table tr td {
     padding: 1rem;
-}
+} */
 
 .time {
     width: 80px;
@@ -31,6 +34,15 @@ table tr td {
     text-align: center;
     justify-content: center;
     display: grid;
+}
+
+table {
+    width: 100%;
+}
+
+table tr td {
+    padding-top: .3rem;
+    text-align: center;
 }
 
 .img {
@@ -74,15 +86,19 @@ table tr td {
 }
 
 .form {
-    background-color: white;
+    background: white;
     display: none;
-    justify-items: center;
     border-radius: .5rem;
+    overflow-y: auto;
+    max-height: 500px;
     position: fixed;
     top: 40px;
-    width: 80%;
-    height: 80%;
-    align-content: center;
+    min-width: 350px;
+    position: fixed;
+    top: calc(100% - 87%);
+    left: 45%;
+    padding: 1rem;
+    z-index: 100;
 }
 
 .description {
@@ -94,9 +110,7 @@ table tr td {
 
 
 .btns_form {
-    position: absolute;
-    bottom: 0px;
-    right: 0px;
+    justify-content: flex-end;
     display: flex;
     align-items: center;
 }
@@ -121,9 +135,40 @@ table tr td {
     background: blue;
 }
 
-.form input {
-    padding: .5rem;
-    border-radius: .5rem;
+
+label {
+    opacity: 0.8;
+    float: left;
+    margin-left: 0.8rem;
 }
 
+.form h1 {
+    font-size: 1.5rem;
+}
+
+.form input, select, textarea {
+    background: rgb(244, 244, 244);
+    border-radius: .5rem;
+    width: 90%;
+    padding: .3rem;
+    border: 1px solid black;
+    padding-left: .5rem;
+    padding-right: .5rem;
+}
+
+
+.form.active ~ #con {
+    filter: blur(10px);
+}
+
+
+#progressContainer {
+    width: 100%;
+    margin-top: 15px;
+}
+
+#progressBar {
+    width: 80%;
+    height: 20px;
+}
 

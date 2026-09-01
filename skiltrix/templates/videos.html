@@ -17,23 +17,29 @@
 
 {% block content %}
     <div class="form" id="form">
-        <form onsubmit="uploadImage(event, 'http://127.0.0.1:8000/skiltrix/videos/')" enctype="multipart/form-data">
+        <form onsubmit="uploadImage(event, '{{url}}skiltrix/videos/')" enctype="multipart/form-data">
 
             {% csrf_token %}
             <table>
                 <tr>
                     <td><label for="title">Title</label></td>
+                </tr>
+                <tr>
                     <td><input type="text" name="title" id="title" required /></td>
                 </tr>
                 <tr>
                     <td><label for="description">Description</label></td>
+                </tr>
+                <tr>
                     <td><input type="text" name="description" id="description" required /></td>
                 </tr>
 
                 <tr>
                     <td><label for="course">Courses</label></td>
+                </tr>
+                <tr>
                     <td>
-                        <select name="course" id="course">
+                        <select name="course" id="course" required>
                             <option hidden>Select</option>
                             {% for course in courses %}
                                 <option value="{{ course.course_id}}">{{ course.name }}</option>
@@ -43,11 +49,32 @@
                 </tr>
                 <tr>
                     <td><label for="video">video</label></td>
+                </tr>
+                <tr>
                     <td><input type="file" name="video" accept="video/*" id="video" required /></td>
                 </tr>
                 <tr>
+                    <td>
+                        <div id="progressContainer" style="display: none;">
+                            <progress id="progressBar" value="0" max="100"></progress>
+                            <span id="progressText">0%</span>
+                        </div>
+
+                        <p id="status"></p>
+                    
+                    </td>
+                </tr>
+                <tr>
                     <td><label for="image">Image</label></td>
-                    <td><input type="file" name="image" accept="image/*" id="image" required /></td>
+                </tr>
+                <tr>
+                    <td><input type="file" name="image" accept="image/*" id="image" onchange="previewImage(event)" required /></td>
+                </tr>
+                
+                <tr>
+                    <td>
+                        <center><img id="imagePreview" src="" alt="Image Preview" style="display: none; max-width: 200px; max-height: 150px; margin-top: 10px;"></center>
+                    </td>
                 </tr>
                 
                 

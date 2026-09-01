@@ -18,18 +18,23 @@
 
 {% block content %}
     <div class="form" id="form">
-        <h1>Upload new Internship</h1>
-        <form onsubmit="sendCompany(event, '{{ request.redirect_url }}skiltrix/internships/')">
+        
+        <center><h1>Upload new Internship</h1></center>
+        <form onsubmit="sendCompany(event, '{{url }}skiltrix/internships/')">
             {% csrf_token %}
             <table>
                 <tr>
                     <td><label for="name">Internship Name</label></td>
-                    <td><input type="text" name="name" id="name" required /></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="name" id="name" placeholder="Name..." required /></td>
                 </tr>
                 <tr>
                     <td><label for="company">Company</label></td>
+                </tr>
+                <tr>
                     <td>
-                        <select name="company" id="company"> 
+                        <select name="company" id="company" required> 
                             <option hidden>Select Company</option>
                             {% for comp in company %}
                                 <option value="{{ comp.company_id }}">{{ comp.name }}</option>
@@ -38,8 +43,11 @@
                     </td>
                 </tr>
                 <tr>
-                    <td><label for="type">Type</label></td> <td>
-                        <select name="type" id="type"> 
+                    <td><label for="type">Type</label></td> 
+                </tr>
+                <tr>
+                    <td>
+                        <select name="type" id="type" required> 
                             <option hidden>Select</option>
                             <option value="remote">Remote</option>
                             <option value="offline">Offline</option>
@@ -50,33 +58,50 @@
                 </tr>
 
                 <tr>
-                    <td><label for="paid">Paid</label></td> <td>
-                        <select name="paid" id="paid"> 
+                    <td><label for="paid">Paid</label></td> 
+                </tr>
+                <tr>
+                    <td>
+                        <select name="paid" id="paid" onchange="toggleInternshipPrice()"> 
                             <option value="0">Free</option>
-                            <option value="1">paid</option>
+                            <option value="1">Paid</option>
                             
                         </select>
                     </td>
                 </tr>
                 
-                <tr>
-                    <td><label for="price">price</label></td>
-                    <td><input type="text" name="price" id="price" required /></td>
+                <tr id="priceLabelRow" style="display: none;">
+                    <td><label for="price">Price</label></td>
                 </tr>
+
+                <tr id="priceInputRow" style="display: none;">
+                    <td>
+                        <input type="number" name="price" id="price" min="0" step="0.01" placeholder="Price..."/>
+                    </td>
+                </tr>
+
 
                 <tr>
                     <td><label for="location">Location</label></td>
-                    <td><input type="text" name="location" id="location" required /></td>
+                </tr>
+                <tr>
+                    <td><input type="text" name="location" id="location" placeholder="Location..." required /></td>
                 </tr>
 
                 
                 <tr>
                     <td><label for="apply_link">Apply link</label></td>
-                    <td><input type="text" name="apply_link" id="apply_link" required /></td>
+                </tr>
+                <tr>
+                    <td>
+                        <textarea type="text" name="apply_link" id="apply_link" placeholder="Apply Link..." required /></textarea>
+                    </td>
                 </tr>
                 <tr>
                     <td><label for="date">Deadline</label></td>
-                    <td><input type="date" name="date" id="date" required /></td>
+                </tr>
+                <tr>
+                    <td><input type="date" name="date" id="date" placeholder="Deadline..." required /></td>
                 </tr>
                 
             </table>
@@ -94,6 +119,11 @@
             </div>
         </form>
 
+        <div id="progressContainer" style="display: none;">
+            <progress id="progressBar" value="0" max="100"></progress>
+            <span id="progressText">0%</span>
+            </div>
+    
     </div>
 
     
@@ -123,7 +153,7 @@
             <tr>
                 <td>
                     <div class="img_con">
-                        <img src="https://cdn.ascentracoresolutions.com/st/images/{{ intern.image}}" class="img" alt="{{ intern.name }}">
+                        <img src="https://cdn.ascentracoresolutions.com/st/images/{{ intern.company.image}}" class="img" alt="{{ intern.name }}">
                         {{ intern.name }}
                     </div>
                 </td>

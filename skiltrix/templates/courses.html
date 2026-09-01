@@ -16,23 +16,41 @@
 
 {% block content %}
     <div class="form" id="form">
-        <form onsubmit="coursesUrl(event, 'http://127.0.0.1:8000/skiltrix/courses/')" enctype="multipart/form-data">
+        <form onsubmit="coursesUrl(event, '{{ url }}skiltrix/courses/')" enctype="multipart/form-data">
             {% csrf_token %}
             <table>
                 <tr>
                     <td><label for="name">Name</label></td>
+                </tr>
+                <tr>
                     <td><input type="text" name="name" id="name" required /></td>
                 </tr>
                 <tr>
                     <td><label for="image">Image</label></td>
-                    <td><input type="file" name="image" accept="image/*" id="image" required /></td>
                 </tr>
                 <tr>
-                    <td><label for="price">Price</label></td>
-                    <td><input type="number" name="price" id="price" required /></td>
+                    <td><input type="file" name="image" accept="image/*" id="image" onchange="previewImage(event)" required /></td>
+                </tr>
+                <tr>
+                    <td>
+                        <center><img id="imagePreview" src="" alt="Image Preview" style="display: none; max-width: 200px; max-height: 150px; margin-top: 10px;"></center>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div id="progressContainer" style="display: none;">
+                            <progress id="progressBar" value="0" max="100"></progress>
+                            <span id="progressText">0%</span>
+                        </div>
+
+                        <p id="status"></p>
+                    
+                    </td>
                 </tr>
                 <tr>
                     <td><label for="type">Type</label></td>
+                </tr>
+                <tr>
                     <td>
                         <select name="type" id="type" required>
                             <option hidden>Select</option>
@@ -45,13 +63,25 @@
                 </tr>
                 <tr>
                     <td><label for="paid">Paid</label></td>
+                </tr>
+                <tr>
                     <td>
-                        <select name="paid" id="paid" required>
-                            <option hidden>Select</option>
+                        <select name="paid" id="paid" onchange="togglePrice()" required>
                             <option value="0">Free</option>
                             <option value="1">Paid</option>
 
                         </select>
+                    </td>
+                </tr>
+                
+                <tr id="priceRow" style="display: none;">
+                    <td>
+                        <label for="price">Price</label>
+                    </td>
+                </tr>
+                <tr id="priceInputRow" style="display: none;">
+                    <td>
+                        <input type="number" name="price" id="price" min="0" step="0.01" placeholder="Enter price" />
                     </td>
                 </tr>
 
@@ -69,6 +99,8 @@
                     Add Course
                 </button>
             </div>
+
+        
         </form>
     </div>
 
