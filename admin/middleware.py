@@ -88,18 +88,30 @@ class ExceptionLoggingMiddleware:
         # Insert dynamically
         # -----------------------------------------
 
-        try:
 
-            insertions.insert_error(
-                ip_address,
-                user_id,
-                "1.0",
-                traceback_text + "\n" + error_message,
-                request.path,
-                500,
-                "web",
-                app_name
-            )
+
+        try:
+            if request.user.is_authenticated:
+                insertions.insert_error(
+                    ip_address,
+                    "1.0",
+                    traceback_text + "\n" + error_message,
+                    request.build_absolute_uri(),
+                    500,
+                    "website",
+                    app_name,
+                    request.user.user_id
+                )
+            else:
+                insertions.insert_error(
+                    ip_address,
+                    "1.0",
+                    traceback_text + "\n" + error_message,
+                    request.build_absolute_uri(),
+                    500,
+                    "website",
+                    app_name
+                )
 
             print("🔥 ERROR INSERTED SUCCESSFULLY")
 

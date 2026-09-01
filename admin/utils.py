@@ -78,10 +78,12 @@ def update_column(db_name, table_name, column_name, new_column_type):
 
 
 images = "https://cdn.ascentracoresolutions.com/"
+url = "http://127.0.0.1:8000/"
 
 def site_data(request):
     data = {
         "images": images,
+        "url": url
     }
 
     return data
