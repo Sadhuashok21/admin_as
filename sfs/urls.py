@@ -4,6 +4,7 @@ from . import views
 urlpatterns = [
     path('', views.Home.as_view(), name="sfs_index"),
     path('blueprints', views.blueprints, name="blueprints"),
+    path('planets', views.pla_wor, name="planets"),
     path('blueprints/blueprint/<str:bp_id>', views.blueprint, name="blueprint"),
     path('sfs_home', views.sfs_home, name="sfs_home"),
     path('upload_category', views.UploadCat.as_view(), name="upload_category"),

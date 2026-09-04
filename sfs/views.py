@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, request
 from .models import *
 from shared_lib.sfs_core.models import *
 from django.views import View
@@ -53,7 +53,7 @@ def firebase_users(request):
     if not firebase_admin._apps:
 
         cred = credentials.Certificate(
-            Path(settings.BASE_DIR) / "sfs.json"
+            Path(settings.BASE_DIR) / "static/js/" / "sfs.json"
         )
 
     firebase_admin.initialize_app(cred)
@@ -78,11 +78,7 @@ def firebase_users(request):
 
             page = page.get_next_page()
 
-        return JsonResponse({
-            "success": True,
-            "count": len(users),
-            "users": users
-        })
+        return JsonResponse({"success": True,"count": len(users),"users": users})
 
     except Exception as e:
 
@@ -149,6 +145,19 @@ def blueprints(request):
         bp = BP.objects.filter(type="blueprint")[:10]
     return render(request, "blueprints.html", {"bps": bp})
 
+def pla_wor(request):
+
+    if not request.user.is_authenticated:
+        return redirect("access-restricted")
+    off = request.GET.get('off', '')
+    if off:
+        bp = BP.objects.filter(type="planet")[int(off)*10:(int(off)*10 + 10)]
+    else:
+        bp = BP.objects.filter(type="planet")[:10]
+    return render(request, "blueprints.html", {"bps": bp})
+
+
+
 
 def sfs_home(request):
     if not request.user.is_authenticated:
@@ -175,11 +184,15 @@ class UploadBp(View):
     def post(self, request):
         if not request.user.is_authenticated:
             return redirect("access-restricted")
+
         name = request.POST.get('name', '')       
         type = request.POST.get('type', '')
         link = request.POST.get('link', '')
-        zip_file = request.POST.get('zip_file', '')
-        images = request.POST.getlist("images", [])
+        zip_file = request.FILES.get('zip_file', '')
+        images = request.FILES.get("images", '')
+
+
+        categories = request.POST.getlist('categories')
 
         if name and type and zip_file and images:
 
@@ -210,7 +223,9 @@ class EditBp(View):
         if bp_id:
             bp = BP.objects.filter(bp_id=bp_id).first()
             if bp:
-                return render(request, "edit_bp.html", {"bp": bp})
+                img = BPImages.objects.filter(bp_id=bp.bp_id)
+                
+                return render(request, "edit_bp.html", {"bp": bp, "img": img})
             else:
                 messages.error("Blueprint not found.")
                 return redirect("bp_edit.html")
@@ -221,21 +236,38 @@ class EditBp(View):
     def put(request):
         return HttpResponse("put method called")
     
-    def post(request):
+    def post(self, request):
         if not request.user.is_authenticated:
             return redirect("access-restricted")
         bp_id = request.POST.get('bp_id', '')
         name = request.POST.get('name', '')
-        image = request.POST.get('image', '')
+        fviews = request.POST.get('fviews', '')
+        flikes = request.POST.get('flikes', '')
+        fdownloads = request.POST.get('fdownloads', '')
+        fshares = request.POST.get('fshares', '')
+        bp_link = request.POST.get('bp_link', '')
 
-        if name and image:
+        if name and fviews and flikes and fdownloads and fshares and bp_link and bp_id:
             bp = BP.objects.filter(bp_id = bp_id).first()
 
             if bp:
                 bp.name = name
+                bp.fviews = fviews
+                bp.flikes = flikes
+                bp.fdownloads = fdownloads
+                bp.fshare = fshares
+                bp.sfs_link = bp_link
                 bp.save()
-                return render(request, "edit_bp.html")
+
+                print("updated")
+
+                url = reverse("sfs:edit_bp") + f"?bp_id={bp.bp_id}"
+                return redirect(url)
+
             
+            print("none")
+
+        print("fields missing")
         return render(request, "edit_bp.html")
 
 

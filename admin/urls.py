@@ -31,6 +31,7 @@ urlpatterns = [
     path('profile/', include(('user_profile.urls', 'profile'), namespace="profile")),
     path('', views.home, name="home"),
     path('logs/', include(("logs.urls", 'logs'), namespace="logs")),
+    path('users/', include(("users.urls", 'users'), namespace="users")),
     path('access-restricted', views.access_restricted, name="access-restricted")
 ] 
 

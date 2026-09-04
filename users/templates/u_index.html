@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}
+    Logs
+{% endblock %}
+
+{% block stylesheet %}
+    <style>
+
+        table {
+            width: 90%;
+            border-collapse: collapse;
+        }
+
+        table tr .data {
+            padding: .5rem;
+            margin: .5rem;
+            text-align: center;
+            max-width: 150px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            
+        }
+
+        .hr_line {
+            border: 0;
+            height: 1px;
+            background-color: #ccc;
+
+        }
+
+        .data.msg {
+            color: red;
+        }
+
+        .data .status {
+            padding: .3rem;
+            border-radius: .5rem;
+            color: white;
+        }
+
+        .status.approved {
+            background-color: green;
+        }
+        
+        .status.pending {
+            background-color: orange;
+        }
+
+        .status.disapproved {
+            background-color: red;
+        }
+        
+    </style>
+
+{% endblock  %}
+
+{% block sidebar %} 
+    {% include "users_sidebar.html" %}
+{% endblock %}
+
+
+
+{% block content %}
+
+    <h1>Users</h1>
+    <form method="get" action="{% url 'users:users_index' %}">
+        <input type="text" name="search" placeholder="Search users..." value="{{ request.GET.search }}">
+        <button type="submit">Search</button>
+    </form>
+    <div class="logs">
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Photo</th>
+                <th>Status</th>
+                <th>Platform</th>
+                <th>Platform name</th>
+            </tr>
+            {% for user in users %}
+                <tr>
+                    <td><hr class="hr_line"></td>
+                    <td><hr class="hr_line"></td>
+                    <td><hr class="hr_line"></td>
+                    <td><hr class="hr_line"></td>
+                    <td><hr class="hr_line"></td>
+                    <td><hr class="hr_line"></td>
+                </tr>
+                <tr>
+                    <td class="data">{{ user.name }}</td>
+                    <td class="data">{{ user.email }}</td>
+                    <td class="data">{{ user.profile }}</td>
+                    <td class="data"><span class="status {{ user.status }}">{{ user.status }}</span></td>
+                    <td class="data">{{ user.platform }}</td>
+                    <td class="data">{{ user.platform_name }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <button >
+            <a href="?off={{ request.GET.off|default:0|add:"-1" }}">Previous</a>
+        </button>
+        <button >
+            <a href="?off={{ request.GET.off|default:0|add:"1" }}">Next</a>
+        </button>
+    </div>
+
+    <div class="view" id="view">
+
+    </div>
+
+    <script src="{% static 'js/logs.js' %}"></script>
+{% endblock %}
