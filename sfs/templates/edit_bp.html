@@ -21,14 +21,37 @@
             background-color: #f0f0f0;
         }
 
-        input, select {
+        input, select, textarea {
             border: 1px solid #ccc;
-            padding: 8px;
-            background-color: tranparent;
             margin: 5px 0 5px 0;
             border-radius: .5rem;
-            width: 100%;
+            height: 30px;
+            padding-left: 10px;
+            padding-right: 10px;
             max-width: 250px
+        }
+
+        .real_fake {
+            background: #f0f0f0;
+            padding: 1rem;
+            border-radius: .5rem;
+            
+        }
+
+        .real, .fakes {
+            padding: 1rem;
+            margin: 1rem;
+            text-align: center;
+            background: white;
+            border-radius: .5rem;
+
+        }
+
+        .img_thumbnail {
+            width: 100px;
+            height: 100px;
+            border-radius: 5px;
+            margin: 5px;
         }
     </style>
 
@@ -40,31 +63,33 @@
 {% block content %}
 
     <form action="" method="POST">
+        {% csrf_token %}
         <label for="name">Name <span class="star"> * </span></label>
         <br>
-        <input type="name" id="name" value="{{bp.name}}" required />
+        <input type="text" id="name" name="name" value="{{bp.name}}" required />
         <br>
+        <input type="hidden" id="bp_id" value="{{bp.bp_id}}" name="bp_id" required />
 
         <div class="real_fake">
             <div class="real">
                 <label for="real_views">Real Views <span class="star"> * </span></label>
                 <br>
-                <input type="real_views" id="real_views" value="{{bp.views}}" readonly />
+                <input type="number" id="real_views" value="{{bp.views}}" readonly />
                 <br>
                 
                 <label for="real_likes">Real Likes <span class="star"> * </span></label>
                 <br>
-                <input type="real_likes" id="real_likes" value="{{bp.likes}}" readonly />
+                <input type="number" id="real_likes" value="{{bp.likes}}" readonly />
                 <br>
                 
                 <label for="real_downloads">Real Downloads <span class="star"> * </span></label>
                 <br>
-                <input type="real_downloads" id="real_downloads" value="{{bp.downloads}}" readonly />
+                <input type="number" id="real_downloads" value="{{bp.downloads}}" readonly />
                 <br>
 
                 <label for="real_shares">Real Shares <span class="star"> * </span></label>
                 <br>
-                <input type="real_shares" id="real_shares" value="{{bp.share}}" readonly />
+                <input type="number" id="real_shares" value="{{bp.share}}" readonly />
                 <br>
             </div>
 
@@ -72,43 +97,49 @@
             <div class="fakes">
                 <label for="fake_views">Fake Views <span class="star"> * </span></label>
                 <br>
-                <input type="fake_views" id="fake_views" value="{{bp.fviews}}" name="fake_views" required />
+                <input type="number" id="fake_fviews" value="{{bp.fviews}}" name="fviews" required />
                 <br>
 
 
                 <label for="fake_likes">Fake Likes <span class="star"> * </span></label>
                 <br>
-                <input type="fake_likes" id="fake_likes" value="{{bp.flikes}}" name="fake_likes" required />
+                <input type="number" id="fake_flikes" value="{{bp.flikes}}" name="flikes" required />
                 <br>
 
                 <label for="fake_downloads">Fake downloads <span class="star"> * </span></label>
                 <br>
-                <input type="fake_downloads" id="fake_downloads" value="{{bp.fdownloads}}" name="fake_downloads" required />
+                <input type="number" id="fake_fdownloads" value="{{bp.fdownloads}}" name="fdownloads" required />
                 <br>
 
                 <label for="fake_shares">Fake Shares <span class="star"> * </span></label>
                 <br>
-                <input type="fake_shares" id="fake_shares" value="{{bp.fshare}}" name="fake_shares" required />
+                <input type="number" id="fake_fshares" value="{{bp.fshare}}" name="fshares" required />
                 <br>
             </div>
         </div>
 
         <label for="type">Type <span class="star"> * </span></label>
         <br>
-        <select> 
-            <option value="select" hidden>Select</option>
+        <select id="type" name="type" required>
             <option value="bp">BP</option>
             <option value="planet">Planet and worlds</option>
         </select>
         
         <br>
-        <label for="type">Link <span class="star"> * </span></label>
+        <label for="link">Link <span class="star"> * </span></label>
         <br>
-        <input type="link" id="link" value="{{bp.sfs_link}}" name="link" required />
+        <textarea type="text" id="link" name="bp_link" required >{{bp.sfs_link}}</textarea>
         
         <br>
         <br>
         <input type="submit" value="Edit BP"/>
+
+        <h2>Images</h2>
+        {% for i in img %}
+        <img src="{{ images }}{{ i }}" alt="image" class="img_thumbnail">
+        {% endfor %}
+        
+        <img src="{{ images }}sfs/images/{{ bp.image }}" alt="image" class="img_thumbnail">
     </form>
 
 {% endblock %}

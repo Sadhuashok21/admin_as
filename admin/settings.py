@@ -58,7 +58,8 @@ INSTALLED_APPS = [
     'shared_lib',
     'shared_lib.skiltrix_core',
     'logs',
-    'shared_lib.utils'
+    'shared_lib.utils',
+    'users',
 ]
 
 AUTH_USER_MODEL = "sfs_core.AllUsers"

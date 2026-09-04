@@ -7,8 +7,27 @@
 
 {% block stylesheet %}
     <style>
+
         table {
+            width: 90%;
             border-collapse: collapse;
+        }
+
+        table tr .data {
+            padding: .5rem;
+            margin: .5rem;
+            text-align: center;
+        }
+
+        .hr_line {
+            border: 0;
+            height: 1px;
+            background-color: #ccc;
+
+        }
+
+        .data.msg {
+            color: red;
         }
     </style>
 {% endblock  %}
@@ -26,7 +45,7 @@
         <button type="submit">Search</button>
     </form>
     <div class="logs">
-        <table border=1>
+        <table>
             <tr>
                 <th>Time</th>
                 <th>User</th>
@@ -38,13 +57,22 @@
             </tr>
             {% for log in logs %}
                 <tr>
-                    <td>{{ log.time }}</td>
-                    <td>{{ log.user }}</td>
-                    <td>{{ log.error_code }}</td>
-                    <td>{{ log.error_msg }}</td>
-                    <td>{{ log.activity_id }}</td>
-                    <td>{{ log.platform }}</td>
-                    <td>{{ log.platform_name }}</td>
+                    <td><hr class="hr_line"></td>
+                    <td><hr class="hr_line"></td>
+                    <td><hr class="hr_line"></td>
+                    <td><hr class="hr_line"></td>
+                    <td><hr class="hr_line"></td>
+                    <td><hr class="hr_line"></td>
+                    <td><hr class="hr_line"></td>
+                </tr>
+                <tr>
+                    <td class="data">{{ log.time }}</td>
+                    <td class="data">{{ log.user }}</td>
+                    <td class="data">{{ log.error_code }}</td>
+                    <td class="data msg">{{ log.error_msg }}</td>
+                    <td class="data">{{ log.activity_id }}</td>
+                    <td class="data">{{ log.platform }}</td>
+                    <td class="data">{{ log.platform_name }}</td>
                 </tr>
             {% endfor %}
         </table>
